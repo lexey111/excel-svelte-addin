@@ -111,7 +111,7 @@
 		padding: 0 0 0 2em;
 		box-sizing: border-box;
 		font-weight: bold;
-		transition: var(--default-transition);
+		transition: var(--transition-default);
 	}
 
 	.modal-header-close {
@@ -138,7 +138,7 @@
 		height: 64px;
 		padding: 0 2em;
 		gap: 6px;
-		transition: var(--slow-transition);
+		transition: var(--transition-slow);
 	}
 
 	dialog::backdrop {

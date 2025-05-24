@@ -3,21 +3,6 @@
 @import 'css/typography.css';
 @import 'css/icons.css';
 
-:root {
-	font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-	line-height: 1.5;
-	font-weight: 400;
-
-	color-scheme: light;
-	color: var(--app-color);
-	background-color: var(--app-background-color);
-
-	font-synthesis: none;
-	text-rendering: optimizeLegibility;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-}
-
 body {
 	margin: 0;
 	display: flex;
@@ -70,11 +55,30 @@ body {
 	transform: translateX(-50%) translateY(-50%);
 }
 
+.wait {
+	font-size: var(--font-normal);
+	color: var(--secondary-text-color);
+	margin: 2em 0;
+	animation: pulse 2s linear both infinite;
+}
+
 @keyframes fadeIn {
 	0% {
 		opacity: 0.1;
 	}
 	100% {
 		opacity: 1;
+	}
+}
+
+@keyframes pulse {
+	0% {
+		opacity: 0.1;
+	}
+	50% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0.1;
 	}
 }

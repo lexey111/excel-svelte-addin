@@ -47,11 +47,11 @@
 		flex-shrink: 0;
 		display: flex;
 		flex-flow: row nowrap;
-		height: 36px;
+		height: 48px;
 		align-items: center;
 		align-content: center;
 		justify-content: center;
-		font-size: 0.8rem;
+		font-size: var(--font-small);
 		width: 100%;
 		border-bottom: 1px solid var(--border-color);
 	}
@@ -59,14 +59,14 @@
 	a.menu-item {
 		padding: 0 1em;
 		height: 100%;
+		min-width: 48px;
 		box-sizing: border-box;
 		display: flex;
 		flex-flow: row nowrap;
 		align-items: center;
 		align-content: center;
 		justify-content: center;
-		transition: var(--default-transition);
-		gap: 6px;
+		transition: var(--transition-default);
 		color: #222;
 		border-bottom: 2px solid #fff;
 		cursor: pointer;
@@ -95,12 +95,23 @@
 		&.active {
 			border-color: var(--accent-color);
 		}
+
+		span {
+			overflow: hidden;
+			transition: var(--transition-default);
+			max-width: 2000px;
+			margin-left: 6px;
+			opacity: 1;
+		}
 	}
 
 	@container (width < 450px) {
-		.menu-item {
+		a.menu-item {
 			span {
-				display: none;
+				max-width: 0;
+				width: 0;
+				margin-left: 0;
+				opacity: 0;
 			}
 		}
 	}

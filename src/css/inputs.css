@@ -11,11 +11,11 @@ input[type='password'] {
 	box-sizing: border-box;
 	padding: 0 0.4rem;
 	outline: none;
-	transition: var(--default-transition);
+	transition: var(--transition-default);
 	display: inline-flex;
 	flex-flow: row nowrap;
 	width: 100%;
-	font-size: 0.9rem;
+	font-size: var(--font-normal);
 
 	&:hover {
 		border-color: var(--border-color-darker);

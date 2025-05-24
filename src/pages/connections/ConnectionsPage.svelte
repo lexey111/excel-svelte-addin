@@ -11,7 +11,7 @@
 
 	{#if $connections.isLoading}
 		<LinearLoader global={true} />
-		<p>Loading connections...</p>
+		<p class="wait">Loading connections...</p>
 	{/if}
 
 	{#if !$connections.isLoading && !$connections.isError}

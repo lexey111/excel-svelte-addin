@@ -114,13 +114,15 @@
 	});
 </script>
 
-{#each $connections.data as connection (connection.id)}
-	<ConnectionItem
-		{connection}
-		onShowRemoveConnectionModal={hanldeShowRemoveConnection}
-		onEditConnection={handleEditConnection}
-	/>
-{/each}
+<div class="connection-list">
+	{#each $connections.data as connection (connection.id)}
+		<ConnectionItem
+			{connection}
+			onShowRemoveConnectionModal={hanldeShowRemoveConnection}
+			onEditConnection={handleEditConnection}
+		/>
+	{/each}
+</div>
 
 <div class="page-actions">
 	<Button onClick={handleNewConnection} icon="add">New connection</Button>
@@ -175,39 +177,61 @@
 </Modal>
 
 <style>
-	:global .connection-item {
+	:global .connection-list {
 		display: flex;
-		flex-flow: row nowrap;
-		align-items: center;
-		width: 100%;
-		transition: var(--default-transition);
-		box-shadow: 0 0 0 1px var(--shade-background-darker);
-		background: var(--shade-background);
+		flex-flow: column wrap;
 
-		padding: 0.5em 0;
+		.connection-item {
+			display: flex;
+			flex-flow: row nowrap;
+			align-items: center;
+			width: 100%;
+			transition: var(--transition-default);
+			box-shadow: 0 0 0 1px var(--shade-background-darker);
+			background: var(--shade-background);
 
-		&:hover {
-			background: var(--secondary-color);
-		}
+			&:hover {
+				background: var(--secondary-color);
+			}
 
-		.connection-name {
-			font-weight: bold;
-			padding: 0 0 0 1em;
-		}
+			.connection-content {
+				padding: 12px;
+				display: grid;
+				grid-template-columns: 1fr 40px;
+				gap: 6px;
+				flex-flow: row nowrap;
+				align-items: center;
+				width: 100%;
+				transition: var(--transition-default);
 
-		.connection-target {
-			font-weight: normal;
-			font-size: 0.8em;
-		}
+				.connection-name {
+					font-weight: bold;
+					padding: 0 0 0 1em;
+				}
 
-		.connection-sources {
-			font-weight: normal;
-			font-size: 0.8em;
-		}
+				.connection-target {
+					font-weight: normal;
+					font-size: var(--font-small);
+					color: var(--secondary-text-color);
+				}
 
-		button {
-			margin-left: auto;
-			margin-right: 1em;
+				.connection-sources {
+					font-weight: normal;
+					font-size: var(--font-small);
+					color: var(--secondary-text-color);
+				}
+
+				button {
+					margin-left: auto;
+					margin-right: 1em;
+				}
+			}
+
+			@container (width < 400px) {
+				.connection-content {
+					padding: 6px;
+				}
+			}
 		}
 	}
 </style>

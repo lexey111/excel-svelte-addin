@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Footer, Header, InitGuard, LoginGuard, Spinner } from './components';
+	import { Footer, Header, InitGuard, LinearLoader, LoginGuard } from './components';
 	import ConnectionsData from './data-sources/ConnectionsData.svelte';
 	import { LoginPage, ProfilePage, TrackingPage, ConnectionsPage } from './pages';
 	import { userData, officeState, currentPage } from './stores';
@@ -45,7 +45,8 @@
 		<Header />
 
 		{#if $currentPage === '_init'}
-			<Spinner message="Initialization..." />
+			<LinearLoader global={true} />
+			<p class="wait">Initialization...</p>
 		{/if}
 
 		{#if $currentPage === '_login'}
@@ -63,9 +64,9 @@
 		{#if $currentPage === 'tracking'}
 			<TrackingPage />
 		{/if}
+		<Footer />
 	</div>
 </QueryClientProvider>
-<Footer />
 
 <style>
 	.center-form {

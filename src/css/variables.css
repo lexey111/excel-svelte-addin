@@ -1,6 +1,12 @@
 :root {
+	--font-large: 16px;
+	--font-normal: 14px;
+	--font-small: 12px;
+
 	--app-color: #213547;
 	--app-background-color: #ffffff;
+
+	--secondary-text-color: #6c757d;
 
 	--border-color: #eef;
 	--border-color-darker: #ccdf;
@@ -15,8 +21,8 @@
 
 	--placeholder-color: #ccc;
 
-	--default-transition: all 0.15s ease-in-out;
-	--slow-transition: all 0.4s ease-in-out;
+	--transition-default: all 0.15s ease-in-out;
+	--transition-slow: all 0.4s ease-in-out;
 
 	--shade-background: #f9f9f9;
 	--shade-background-darker: #ededed;

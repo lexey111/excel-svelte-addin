@@ -69,6 +69,6 @@
 	}
 
 	.alert-message-text {
-		font-size: 0.9em;
+		font-size: var(--font-normal);
 	}
 </style>

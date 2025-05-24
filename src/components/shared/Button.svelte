@@ -67,14 +67,13 @@
 		border-radius: var(--border-radius);
 		border: none;
 		padding: 0.6em 3em;
-		font-size: 1em;
 		font-weight: 500;
 		font-family: inherit;
 		cursor: pointer;
 
 		background: var(--accent-color);
 		color: var(--accent-contrast-color);
-		transition: var(--default-transition);
+		transition: var(--transition-default);
 
 		display: flex;
 		flex-flow: row wrap;
@@ -82,7 +81,6 @@
 		align-content: center;
 		justify-content: center;
 		gap: 6px;
-		font-size: 0.8em;
 		height: 36px;
 		width: auto;
 		flex-grow: 0;
@@ -135,8 +133,7 @@
 		}
 		&.small {
 			padding: 0.6em 1em;
-			font-size: 1em;
-			font-size: 0.6em;
+			font-size: var(--font-small);
 			height: auto;
 			width: auto;
 

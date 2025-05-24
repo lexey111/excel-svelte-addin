@@ -51,7 +51,7 @@
 			label {
 				font-weight: 500;
 				width: 120px;
-				font-size: 0.9em;
+				font-size: var(--font-small);
 				align-self: flex-start;
 				margin-top: 0.6em;
 				padding-bottom: 0.4em;
@@ -82,7 +82,7 @@
 				width: 100%;
 
 				.input-error {
-					font-size: 0.8em;
+					font-size: var(--font-small);
 					color: var(--error-color);
 				}
 			}

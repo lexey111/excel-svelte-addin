@@ -30,7 +30,7 @@
 	}
 
 	.message {
-		font-size: 0.8rem;
+		font-size: var(--font-small);
 		opacity: 0.8;
 		margin-left: 0.5em;
 	}

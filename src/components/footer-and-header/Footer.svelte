@@ -89,10 +89,11 @@
 		flex-flow: row nowrap;
 		gap: 6px;
 		height: 48px;
+		width: 100%;
 		align-items: center;
 		align-content: center;
 		justify-content: center;
-		font-size: 0.8rem;
+		font-size: var(--font-small);
 		color: #88a;
 
 		svg {

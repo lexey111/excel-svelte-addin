@@ -23,7 +23,7 @@
 
 <style>
 	.badge {
-		font-size: 0.8em;
+		font-size: var(--font-small);
 		padding: 0.2em 0.8em;
 		border-radius: 1em;
 
