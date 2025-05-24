@@ -165,8 +165,8 @@
 			max-width: 36px;
 
 			svg.icon {
-				width: 18px;
-				height: 18px;
+				width: 16px;
+				height: 16px;
 			}
 		}
 		&.with-icon {

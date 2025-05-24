@@ -1,6 +1,5 @@
 <script>
-	import { Spinner } from '../../components';
-	import Alert from '../../components/shared/Alert.svelte';
+	import { Alert, LinearLoader } from '../../components';
 	import { connections } from '../../stores';
 	import ConnectionList from './ConnectionList.svelte';
 </script>
@@ -11,7 +10,8 @@
 	{/if}
 
 	{#if $connections.isLoading}
-		<Spinner message="Loading connections..." />
+		<LinearLoader />
+		<p>Loading connections...</p>
 	{/if}
 
 	{#if !$connections.isLoading && !$connections.isError}

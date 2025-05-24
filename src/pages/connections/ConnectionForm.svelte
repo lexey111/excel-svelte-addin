@@ -77,6 +77,7 @@
 				display: flex;
 				flex-flow: column wrap;
 				gap: 6px;
+				width: 100%;
 
 				.input-error {
 					font-size: 0.8em;
