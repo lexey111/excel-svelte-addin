@@ -36,12 +36,26 @@
 	<div class="source-content">
 		<fieldset>
 			<label for={'cellAddress' + id}>Excel cell</label>
-			<input type="text" id={'cellAddress' + id} bind:value={cellAddress} placeholder="B52" />
+			<input
+				type="text"
+				id={'cellAddress' + id}
+				bind:value={cellAddress}
+				placeholder="B52"
+				required
+				aria-invalid={!cellAddress.trim()}
+			/>
 		</fieldset>
 
 		<fieldset>
 			<label for={'version' + id}>Version</label>
-			<input type="text" id={'version' + id} bind:value={version} placeholder="Version" />
+			<input
+				type="text"
+				id={'version' + id}
+				bind:value={version}
+				placeholder="Version"
+				required
+				aria-invalid={!version.trim()}
+			/>
 		</fieldset>
 
 		<fieldset>
@@ -55,7 +69,14 @@
 
 		<fieldset>
 			<label for={'entityName' + id}>Entity Name</label>
-			<input type="text" id={'entityName' + id} bind:value={entityName} placeholder="Metric" />
+			<input
+				type="text"
+				id={'entityName' + id}
+				bind:value={entityName}
+				placeholder="Metric"
+				required
+				aria-invalid={!entityName.trim()}
+			/>
 		</fieldset>
 	</div>
 

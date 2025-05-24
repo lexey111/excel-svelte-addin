@@ -24,12 +24,21 @@
 			id={'dimensionName' + sourceId + id}
 			bind:value={name}
 			placeholder="Country"
+			required
+			aria-invalid={!name.trim()}
 		/>
 	</fieldset>
 
 	<fieldset>
 		<label for={'dimensionValue' + sourceId + id}>Value</label>
-		<input type="text" id={'dimensionValue' + sourceId + id} bind:value placeholder="US" />
+		<input
+			type="text"
+			id={'dimensionValue' + sourceId + id}
+			bind:value
+			placeholder="US"
+			required
+			aria-invalid={!value.trim()}
+		/>
 	</fieldset>
 
 	<Button

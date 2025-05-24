@@ -49,8 +49,17 @@
 			font-weight: bold;
 		}
 
+		a:hover {
+			text-decoration: none;
+		}
+		a:focus {
+			outline: none;
+			text-decoration: underline;
+		}
+
 		&.active {
 			background: var(--primary-color);
+
 			a {
 				color: var(--primary-contrast-color);
 			}

@@ -8,10 +8,10 @@
 
 	let { connection = $bindable() }: Props = $props();
 
-	const validName = $derived(!!connection.name.trim());
-
 	const alreadyExists = $derived(() => {
-		return ($connections || []).some((c) => c.id !== connection.id && c.name === connection.name);
+		return ($connections || []).some(
+			(c) => c.id !== connection.id && c.name.trim() === connection.name.trim()
+		);
 	});
 </script>
 
@@ -29,7 +29,7 @@
 			required
 			autofocus
 			placeholder="Connection name"
-			aria-invalid={!validName}
+			aria-invalid={!connection.name.trim() || alreadyExists()}
 		/>
 		{#if alreadyExists()}
 			<span class="input-error">A connection with this name already exists</span>

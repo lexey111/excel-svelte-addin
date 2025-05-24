@@ -5,25 +5,25 @@
 	import ConnectionForm from './ConnectionForm.svelte';
 	import ConnectionItem from './partials/ConnectionItem.svelte';
 
-	let connectionModalOpen = $state(false);
+	let editConnectionModalOpen = $state(false);
 	let connectionModalMode = $state<'edit' | 'create'>('create');
 
 	let currentConnection = $state<Connection | undefined>(undefined);
 
 	const handleNewConnection = () => {
-		connectionModalOpen = true;
+		editConnectionModalOpen = true;
 		connectionModalMode = 'create';
 
 		currentConnection = createConnection();
 	};
 
 	const closeConnectionModal = () => {
-		connectionModalOpen = false;
+		editConnectionModalOpen = false;
 	};
 
 	const confirmConnectionModal = () => {
 		if (!currentConnection) {
-			connectionModalOpen = false;
+			editConnectionModalOpen = false;
 			return;
 		}
 
@@ -38,7 +38,7 @@
 			});
 		}
 
-		connectionModalOpen = false;
+		editConnectionModalOpen = false;
 	};
 
 	let showDeleteConnectionConfirmation = $state(false);
@@ -84,9 +84,34 @@
 
 		currentConnection = JSON.parse(JSON.stringify($connections[connectionIdx]));
 
-		connectionModalOpen = true;
+		editConnectionModalOpen = true;
 		connectionModalMode = 'edit';
 	};
+
+	const connectionCanBeSaved = $derived(() => {
+		if (!currentConnection) {
+			return false;
+		}
+
+		const alreadyExists = ($connections || []).some(
+			(c) => c.id !== currentConnection!.id && c.name.trim() === currentConnection!.name.trim()
+		);
+
+		return (
+			!alreadyExists &&
+			!!currentConnection.name.trim() &&
+			currentConnection.sources.length > 0 &&
+			currentConnection.sources.every(
+				(source) =>
+					!!source.cellAddress.trim() &&
+					!!source.entityName.trim() &&
+					!!source.entityType.trim() &&
+					!!source.version.trim() &&
+					source.locators.length > 0 &&
+					source.locators.every((locator) => !!locator.name.trim() && !!locator.value.trim())
+			)
+		);
+	});
 </script>
 
 {#each $connections as connection (connection.id)}
@@ -101,7 +126,7 @@
 	<Button onClick={handleNewConnection} icon="add">New connection</Button>
 </div>
 
-{#snippet header()}
+{#snippet editConnectionHeader()}
 	{#if connectionModalMode === 'create'}
 		New connection
 	{:else}
@@ -109,9 +134,9 @@
 	{/if}
 {/snippet}
 
-{#snippet footer()}
+{#snippet editConnectionFooter()}
 	<Button variant="secondary" onClick={closeConnectionModal}>Cancel</Button>
-	<Button variant="primary" onClick={confirmConnectionModal}>
+	<Button variant="primary" onClick={confirmConnectionModal} disabled={!connectionCanBeSaved()}>
 		{#if connectionModalMode === 'create'}
 			Create
 		{:else}
@@ -121,11 +146,11 @@
 {/snippet}
 
 <Modal
-	open={connectionModalOpen}
-	onClose={() => (connectionModalOpen = false)}
+	open={editConnectionModalOpen}
+	onClose={() => (editConnectionModalOpen = false)}
 	size="full-auto"
-	{header}
-	{footer}
+	header={editConnectionHeader}
+	footer={editConnectionFooter}
 >
 	<ConnectionForm bind:connection={currentConnection} />
 </Modal>

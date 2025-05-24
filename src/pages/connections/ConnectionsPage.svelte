@@ -4,8 +4,6 @@
 </script>
 
 <div class="app-page">
-	<h3>Connections</h3>
-
 	{#if $connections.length > 0}
 		<p>Manage your connections here.</p>
 	{:else}
