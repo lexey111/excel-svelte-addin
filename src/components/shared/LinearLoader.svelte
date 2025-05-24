@@ -1,4 +1,12 @@
-<div class="loader-container">
+<script lang="ts">
+	type Props = {
+		global?: boolean;
+	};
+
+	let { global = false }: Props = $props();
+</script>
+
+<div class="loader-container" class:global>
 	<span class="loader"></span>
 </div>
 
@@ -12,6 +20,14 @@
 		height: 3px;
 		width: 100%;
 		background: var(--shade-background-darker);
+
+		&.global {
+			position: fixed;
+			top: 38px;
+			left: 0;
+			right: 0;
+			z-index: 9999;
+		}
 	}
 
 	.loader {

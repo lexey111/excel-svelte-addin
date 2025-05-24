@@ -3,7 +3,7 @@
 	import { connections, createConnection } from '../../stores';
 	import type { Connection } from '../../types';
 	import ConnectionForm from './ConnectionForm.svelte';
-	import ConnectionItem from './partials/ConnectionItem.svelte';
+	import { ConnectionItem } from './partials';
 
 	let editConnectionModalOpen = $state(false);
 	let connectionModalMode = $state<'edit' | 'create'>('create');
@@ -181,7 +181,9 @@
 		align-items: center;
 		width: 100%;
 		transition: var(--default-transition);
-		border-radius: var(--border-radius);
+		box-shadow: 0 0 0 1px var(--shade-background-darker);
+		background: var(--shade-background);
+
 		padding: 0.5em 0;
 
 		&:hover {

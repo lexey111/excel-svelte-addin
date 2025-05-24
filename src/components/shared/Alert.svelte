@@ -30,7 +30,6 @@
 		color: var(--error-color);
 		background-color: var(--error-color-light);
 		padding: 2em;
-		border-radius: var(--border-radius);
 		border: 1px solid var(--error-color-border);
 		animation-name: fadeIn;
 		animation-duration: 0.4s;

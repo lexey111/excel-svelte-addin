@@ -47,14 +47,23 @@
 		a {
 			color: #222;
 			font-weight: bold;
+			text-underline-offset: 4px;
 		}
 
 		a:hover {
 			text-decoration: none;
 		}
+
 		a:focus {
 			outline: none;
-			text-decoration: underline;
+			text-decoration: none;
+		}
+		&:focus-within {
+			background: var(--secondary-color);
+
+			a {
+				color: var(--secondary-contrast-color);
+			}
 		}
 
 		&.active {

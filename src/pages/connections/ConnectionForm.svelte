@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Alert } from '../../components';
 	import type { Connection } from '../../types';
-	import { ConnectionParams, ConnectionSources } from './partials/index';
+	import { ConnectionParams, ConnectionSources } from './partials';
 
 	type Props = {
 		connection?: Connection;
@@ -24,16 +24,14 @@
 <style>
 	:global .connection-form {
 		container-type: size;
+		margin: 0 auto;
+		width: clamp(200px, 100%, 600px);
 
 		.mandatory-sign {
 			color: var(--dangerous-color);
 			padding: 0 4px;
 			display: inline-block;
 			transform: translateY(-2px);
-		}
-
-		h2:first-of-type {
-			margin-top: 0;
 		}
 
 		fieldset {
@@ -102,10 +100,11 @@
 				margin: 0 0 1em 0;
 			}
 			background: var(--shade-background);
-			border-radius: var(--border-radius);
 			padding: 1em;
 			margin-bottom: 1em;
-			box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
+			box-shadow: 0 0 0 1px var(--shade-background-darker);
+			max-width: 600px;
+			min-width: 200px;
 		}
 
 		.source-dimensions {

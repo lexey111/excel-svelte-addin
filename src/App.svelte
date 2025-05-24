@@ -1,10 +1,7 @@
 <script lang="ts">
 	import { Footer, Header, InitGuard, LoginGuard, Spinner } from './components';
 	import ConnectionsData from './data-sources/ConnectionsData.svelte';
-	import ConnectionsPage from './pages/connections/ConnectionsPage.svelte';
-	import LoginPage from './pages/login/LoginPage.svelte';
-	import ProfilePage from './pages/profile/ProfilePage.svelte';
-	import TrackingPage from './pages/tracking/TrackingPage.svelte';
+	import { LoginPage, ProfilePage, TrackingPage, ConnectionsPage } from './pages';
 	import { userData, officeState, currentPage } from './stores';
 	import { QueryClient, QueryClientProvider } from '@tanstack/svelte-query';
 

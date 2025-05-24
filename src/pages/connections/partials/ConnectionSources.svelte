@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { Badge, Button, Modal } from '../../../components';
-	import ExclamationIcon from '../../../components/icons/ExclamationIcon.svelte';
+	import { Badge, Button, Modal, ExclamationIcon } from '../../../components';
 	import { makeid } from '../../../lib/utils';
 	import type { Connection } from '../../../types';
 	import ConnectionSource from './ConnectionSource.svelte';
@@ -93,13 +92,13 @@
 	};
 </script>
 
-<h3 class={connection.sources.length === 0 ? 'dangerous' : ''}>
+<h4 class={connection.sources.length === 0 ? 'dangerous' : ''}>
 	Sources {#if connection.sources.length === 0}
 		<ExclamationIcon inline={true} color="dangerous" />
 	{:else}
 		<Badge variant="primary">{connection.sources.length}</Badge>
 	{/if}
-</h3>
+</h4>
 
 {#each connection.sources as source, index (source.id)}
 	<ConnectionSource

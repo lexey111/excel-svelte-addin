@@ -27,7 +27,7 @@
 	}
 
 	input {
-		max-width: 100%;
+		max-width: 300px;
 		min-width: 200px;
 	}
 

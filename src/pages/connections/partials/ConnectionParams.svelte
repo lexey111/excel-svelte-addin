@@ -15,8 +15,6 @@
 	});
 </script>
 
-<h2>Connection parameters</h2>
-
 <fieldset>
 	<label for="name"><b>Name</b><span class="mandatory-sign">*</span></label>
 	<!-- svelte-ignore a11y_autofocus -->
@@ -36,8 +34,6 @@
 		{/if}
 	</div>
 </fieldset>
-
-<h4>For Book ans Sheet</h4>
 
 <fieldset>
 	<label for="bookName">Book name</label>

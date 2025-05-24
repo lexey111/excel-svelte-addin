@@ -10,7 +10,7 @@
 	{/if}
 
 	{#if $connections.isLoading}
-		<LinearLoader />
+		<LinearLoader global={true} />
 		<p>Loading connections...</p>
 	{/if}
 
