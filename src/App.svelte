@@ -35,6 +35,7 @@
 
 <InitGuard />
 <LoginGuard />
+
 <QueryClientProvider client={queryClient}>
 	{#if $officeState.isOfficeInitialized && $userData.isAuthorized}
 		<ConnectionsData />

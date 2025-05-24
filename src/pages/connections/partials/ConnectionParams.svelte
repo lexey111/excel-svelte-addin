@@ -9,7 +9,7 @@
 	let { connection = $bindable() }: Props = $props();
 
 	const alreadyExists = $derived(() => {
-		return ($connections || []).some(
+		return ($connections.data || []).some(
 			(c) => c.id !== connection.id && c.name.trim() === connection.name.trim()
 		);
 	});

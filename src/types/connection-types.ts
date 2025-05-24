@@ -34,3 +34,9 @@ export type Connection = {
 	sheetTitle?: string;
 	sources: Source[];
 };
+
+export type ConnectionsStore = {
+	isLoading: boolean;
+	isError: boolean;
+	data: Connection[];
+};

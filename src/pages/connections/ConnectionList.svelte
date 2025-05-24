@@ -21,16 +21,16 @@
 		editConnectionModalOpen = false;
 	};
 
-	const confirmConnectionModal = () => {
+	const confirmConnectionModal = async () => {
 		if (!currentConnection) {
 			editConnectionModalOpen = false;
 			return;
 		}
 
 		if (connectionModalMode === 'create') {
-			$connections = [...$connections, { ...currentConnection }];
+			$connections.data = [...$connections.data, { ...currentConnection }];
 		} else {
-			$connections = $connections.map((c) => {
+			$connections.data = $connections.data.map((c) => {
 				if (c.id !== currentConnection?.id) {
 					return c;
 				}
@@ -51,25 +51,25 @@
 		showDeleteConnectionConfirmation = false;
 	};
 
-	const confirmDeleteConnection = () => {
+	const confirmDeleteConnection = async () => {
 		showDeleteConnectionConfirmation = false;
 		if (!deleteConnectionContext.id) {
 			return;
 		}
 
-		$connections = $connections.filter((c) => c.id !== deleteConnectionContext.id);
+		$connections.data = $connections.data.filter((c) => c.id !== deleteConnectionContext.id);
 	};
 
 	const hanldeShowRemoveConnection = (connectionId?: string) => {
 		if (!connectionId) {
 			return;
 		}
-		const connectionIdx = $connections.findIndex((c) => c.id === connectionId);
+		const connectionIdx = $connections.data.findIndex((c) => c.id === connectionId);
 		if (connectionIdx === -1) {
 			return;
 		}
 		deleteConnectionContext.id = connectionId;
-		deleteConnectionContext.name = $connections[connectionIdx].name;
+		deleteConnectionContext.name = $connections.data[connectionIdx].name;
 		showDeleteConnectionConfirmation = true;
 	};
 
@@ -77,12 +77,12 @@
 		if (!connectionId) {
 			return;
 		}
-		const connectionIdx = $connections.findIndex((c) => c.id === connectionId);
+		const connectionIdx = $connections.data.findIndex((c) => c.id === connectionId);
 		if (connectionIdx === -1) {
 			return;
 		}
 
-		currentConnection = JSON.parse(JSON.stringify($connections[connectionIdx]));
+		currentConnection = JSON.parse(JSON.stringify($connections.data[connectionIdx]));
 
 		editConnectionModalOpen = true;
 		connectionModalMode = 'edit';
@@ -93,7 +93,7 @@
 			return false;
 		}
 
-		const alreadyExists = ($connections || []).some(
+		const alreadyExists = ($connections.data || []).some(
 			(c) => c.id !== currentConnection!.id && c.name.trim() === currentConnection!.name.trim()
 		);
 
@@ -114,7 +114,7 @@
 	});
 </script>
 
-{#each $connections as connection (connection.id)}
+{#each $connections.data as connection (connection.id)}
 	<ConnectionItem
 		{connection}
 		onShowRemoveConnectionModal={hanldeShowRemoveConnection}

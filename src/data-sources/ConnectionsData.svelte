@@ -1,29 +1,32 @@
 <script lang="ts">
 	import { createQuery } from '@tanstack/svelte-query';
 	import type { Connection } from '../types';
+	import { connections, makeFakeConnections } from '../stores';
 
 	const query = createQuery<Connection[]>({
 		queryKey: ['connections'],
-		queryFn: () => {
+		queryFn: async () => {
+			$connections.isLoading = false;
+
 			const resultPromise = new Promise<Connection[]>((res) => {
 				setTimeout(() => {
-					res([]);
-				}, 1000);
+					res(makeFakeConnections());
+				}, 500);
 			});
 
-			return resultPromise;
+			return resultPromise.then((data) => {
+				$connections.data = data;
+				console.log('data', data);
+				return data;
+			});
 		}
 	});
-</script>
 
-<div>
-	{#if $query.isLoading}
-		<p>Loading...</p>
-	{:else if $query.isError}
-		<p>Error: {$query.error.message}</p>
-	{:else if $query.isSuccess}
-		{#each $query.data as connection (connection.id)}
-			<p>{connection.name}</p>
-		{/each}
-	{/if}
-</div>
+	query.subscribe((state) => {
+		if (!state) return;
+		$connections.isError = state.isError;
+		$connections.isLoading = state.isLoading || state.isFetching;
+
+		console.log('state', state);
+	});
+</script>
