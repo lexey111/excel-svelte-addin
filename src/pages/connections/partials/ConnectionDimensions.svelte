@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { ExclamationIcon, Button } from '../../../components';
+	import { ExclamationIcon, Button, Badge } from '../../../components';
 	import type { DimensionLocator } from '../../../types';
 	import ConnectionDimension from './ConnectionDimension.svelte';
 
@@ -23,7 +23,7 @@
 		Dimensions {#if locators.length === 0}
 			<ExclamationIcon inline={true} color="dangerous" />
 		{:else}
-			[{locators.length}]
+			<Badge variant="secondary">{locators.length}</Badge>
 		{/if}
 	</h5>
 

@@ -24,7 +24,7 @@
 	--primary-color: #387adf;
 	--primary-contrast-color: #fff;
 
-	--dangerous-color: #fc4100;
+	--dangerous-color: #dc3545;
 	--dangerous-contrast-color: #fff;
 
 	--secondary-color: #e9e9e9;
@@ -37,4 +37,22 @@
 	--error-color-light: #fae1dc;
 	--error-color-border: hsl(from var(--error-color-light) h s calc(l - 10));
 	--error-color-shadow: hsl(from var(--error-color-light) h calc(s + 5) calc(l - 5));
+
+	--sub-color: #6c757d;
+	--sub-contrast-color: #fff;
+
+	--success-color: #198754;
+	--success-contrast-color: #fff;
+
+	--warning-color: #ffc107;
+	--warning-contrast-color: #fff;
+
+	--info-color: #0dcaf0;
+	--info-contrast-color: #fff;
+
+	--light-color: #f8f9fa;
+	--light-contrast-color: #000;
+
+	--dark-color: #212529;
+	--dark-contrast-color: #fff;
 }

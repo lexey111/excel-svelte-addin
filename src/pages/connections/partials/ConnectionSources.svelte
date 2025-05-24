@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Button, Modal } from '../../../components';
+	import { Badge, Button, Modal } from '../../../components';
 	import ExclamationIcon from '../../../components/icons/ExclamationIcon.svelte';
 	import { makeid } from '../../../lib/utils';
 	import type { Connection } from '../../../types';
@@ -97,7 +97,7 @@
 	Sources {#if connection.sources.length === 0}
 		<ExclamationIcon inline={true} color="dangerous" />
 	{:else}
-		[{connection.sources.length}]
+		<Badge variant="primary">{connection.sources.length}</Badge>
 	{/if}
 </h3>
 
