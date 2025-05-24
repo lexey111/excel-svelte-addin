@@ -87,6 +87,7 @@
 		width: auto;
 		flex-grow: 0;
 		flex-shrink: 0;
+		font-weight: 600;
 
 		svg {
 			opacity: 0.8;

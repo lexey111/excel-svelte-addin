@@ -19,18 +19,24 @@
 			{connection.name}
 		</a>
 
-		{#if connection.bookName || connection.sheetTitle || connection.sheetNumber}
+		{#if !!connection.bookName?.trim() || !!connection.sheetTitle?.trim() || connection.sheetNumber}
 			<div class="connection-target">
-				{[connection.bookName, connection.sheetTitle || connection.sheetNumber]
-					.filter(Boolean)
-					.join(' | ')}
+				{#if connection.bookName}
+					<b>Book</b>: {connection.bookName}
+				{/if}
+
+				{#if connection.sheetTitle || connection.sheetNumber}
+					<b>Sheet</b>: {connection.sheetTitle || connection.sheetNumber}
+				{/if}
 			</div>
+		{:else}
+			<div class="connection-target">Book and sheet are not specified</div>
 		{/if}
 
 		{#if connection.sources.length > 0}
 			<div class="connection-sources">
-				Sources: {connection.sources.length},
-				{connection.sources.map((s) => s.cellAddress).join(',')}
+				<b>Sources</b>: {connection.sources.length},
+				{connection.sources.map((s) => s.cellAddress).join(', ')}
 			</div>
 		{/if}
 	</div>

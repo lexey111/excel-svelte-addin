@@ -114,6 +114,34 @@ export const makeFakeConnections = (): Connection[] => {
 					]
 				}
 			]
+		},
+		{
+			id: makeid(8),
+			name: 'Fake connection 3',
+			bookName: '',
+			sheetNumber: 0,
+			sheetTitle: '',
+			sources: [
+				{
+					id: makeid(8),
+					entityName: 'Metric Three',
+					entityType: 'metric',
+					cellAddress: 'C2',
+					version: 'Live Actuals',
+					locators: [
+						{
+							id: makeid(8),
+							name: 'Country',
+							value: 'ES'
+						},
+						{
+							id: makeid(8),
+							name: 'Product',
+							value: 'Product D'
+						}
+					]
+				}
+			]
 		}
 	];
 };
