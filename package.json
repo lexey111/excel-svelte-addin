@@ -26,6 +26,7 @@
 		"validate": "office-addin-manifest validate manifest.xml"
 	},
 	"dependencies": {
+		"@tanstack/svelte-query": "^5.77.0",
 		"svelte": "^5.23.1"
 	},
 	"devDependencies": {
@@ -33,9 +34,9 @@
 		"@eslint/js": "^9.18.0",
 		"@sveltejs/vite-plugin-svelte": "^5.0.3",
 		"@tsconfig/svelte": "^5.0.4",
-		"@vitejs/plugin-basic-ssl": "^2.0.0",
 		"@types/office-js": "^1.0.377",
 		"@types/office-runtime": "^1.0.35",
+		"@vitejs/plugin-basic-ssl": "^2.0.0",
 		"eslint": "^9.18.0",
 		"eslint-config-prettier": "^10.0.1",
 		"eslint-plugin-svelte": "^3.0.0",
