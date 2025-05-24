@@ -1,10 +1,20 @@
+<script lang="ts">
+	type Props = {
+		inline?: boolean;
+		color?: 'dangerous';
+		size?: number;
+	};
+
+	let { inline, color, size }: Props = $props();
+</script>
+
 <svg
-	width="24"
-	height="24"
+	width={size || 24}
+	height={size || 24}
 	viewBox="0 0 24 24"
 	fill="currentColor"
 	xmlns="http://www.w3.org/2000/svg"
-	class="icon"
+	class={'icon' + (inline ? ' inline' : '') + (color === 'dangerous' ? ' dangerous' : '')}
 >
 	<path
 		fill-rule="evenodd"

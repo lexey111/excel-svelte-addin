@@ -23,7 +23,7 @@
 
 		&.global {
 			position: fixed;
-			top: 38px;
+			top: 0;
 			left: 0;
 			right: 0;
 			z-index: 9999;
