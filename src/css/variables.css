@@ -32,7 +32,7 @@
 
 	--remark-color: #999;
 
-	--error-color: #9c0935;
+	--error-color: #fc4100;
 	--error-contrast-color: #fff;
 	--error-color-light: #fae1dc;
 	--error-color-border: hsl(from var(--error-color-light) h s calc(l - 10));

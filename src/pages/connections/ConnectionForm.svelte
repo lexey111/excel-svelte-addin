@@ -50,6 +50,9 @@
 				font-weight: 500;
 				width: 120px;
 				font-size: 0.9em;
+				align-self: flex-start;
+				margin-top: 0.6em;
+				padding-bottom: 0.4em;
 			}
 
 			input,
@@ -68,6 +71,17 @@
 				grid-column-end: 3;
 				max-width: 420px;
 				margin: 0.5em 0 0 0;
+			}
+
+			.input-container {
+				display: flex;
+				flex-flow: column wrap;
+				gap: 6px;
+
+				.input-error {
+					font-size: 0.8em;
+					color: var(--error-color);
+				}
 			}
 		}
 

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { connections } from '../../../stores';
 	import type { Connection } from '../../../types';
 
 	type Props = {
@@ -7,7 +8,11 @@
 
 	let { connection = $bindable() }: Props = $props();
 
-	let validName = $derived(!!connection.name.trim());
+	const validName = $derived(!!connection.name.trim());
+
+	const alreadyExists = $derived(() => {
+		return ($connections || []).some((c) => c.id !== connection.id && c.name === connection.name);
+	});
 </script>
 
 <h3>Connection parameters</h3>
@@ -15,16 +20,21 @@
 <fieldset>
 	<label for="name"><b>Name</b><span class="mandatory-sign">*</span></label>
 	<!-- svelte-ignore a11y_autofocus -->
-	<input
-		type="text"
-		id="name"
-		bind:value={connection.name}
-		autocomplete="off"
-		required
-		autofocus
-		placeholder="Connection name"
-		aria-invalid={!validName}
-	/>
+	<div class="input-container">
+		<input
+			type="text"
+			id="name"
+			bind:value={connection.name}
+			autocomplete="off"
+			required
+			autofocus
+			placeholder="Connection name"
+			aria-invalid={!validName}
+		/>
+		{#if alreadyExists()}
+			<span class="input-error">A connection with this name already exists</span>
+		{/if}
+	</div>
 </fieldset>
 
 <h4>For Book ans Sheet</h4>
