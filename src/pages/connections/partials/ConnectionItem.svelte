@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Button } from '../../../components/shared/index';
+	import { Button } from '../../../components';
 	import type { Connection } from '../../../types';
 
 	type Props = {

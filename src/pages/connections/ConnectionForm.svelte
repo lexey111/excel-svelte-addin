@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Alert from '../../components/shared/Alert.svelte';
+	import { Alert } from '../../components';
 	import type { Connection } from '../../types';
 	import { ConnectionParams, ConnectionSources } from './partials/index';
 

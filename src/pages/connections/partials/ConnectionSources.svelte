@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { WarningIcon } from '../../../components/icons';
-	import { Button, Modal } from '../../../components/shared/index';
+	import { Button, Modal, WarningIcon } from '../../../components';
 	import { makeid } from '../../../lib/utils';
 	import type { Connection } from '../../../types';
 	import ConnectionSource from './ConnectionSource.svelte';

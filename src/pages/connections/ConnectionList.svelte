@@ -1,6 +1,5 @@
 <script lang="ts">
-	import Button from '../../components/shared/Button.svelte';
-	import Modal from '../../components/shared/Modal.svelte';
+	import { Button, Modal } from '../../components';
 	import { connections, createConnection } from '../../stores';
 	import type { Connection } from '../../types';
 	import ConnectionForm from './ConnectionForm.svelte';

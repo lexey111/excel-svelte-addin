@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Button from '../../components/shared/Button.svelte';
+	import { Button } from '../../components';
 	import { logout, userData } from '../../stores';
 </script>
 

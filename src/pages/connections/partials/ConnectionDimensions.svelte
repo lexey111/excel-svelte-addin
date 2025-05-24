@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { WarningIcon } from '../../../components/icons';
-	import { Button } from '../../../components/shared/index';
+	import { WarningIcon, Button } from '../../../components';
 	import type { DimensionLocator } from '../../../types';
 	import ConnectionDimension from './ConnectionDimension.svelte';
 

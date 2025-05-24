@@ -1,9 +1,5 @@
 <script lang="ts">
-	import Footer from './components/footer-and-header/Footer.svelte';
-	import Header from './components/footer-and-header/Header.svelte';
-	import InitGuard from './components/guards/InitGuard.svelte';
-	import LoginGuard from './components/guards/LoginGuard.svelte';
-	import Spinner from './components/shared/Spinner.svelte';
+	import { Footer, Header, InitGuard, LoginGuard, Spinner } from './components';
 	import ConnectionsPage from './pages/connections/ConnectionsPage.svelte';
 	import LoginPage from './pages/login/LoginPage.svelte';
 	import ProfilePage from './pages/profile/ProfilePage.svelte';

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
-	import Alert from '../../components/shared/Alert.svelte';
+	import { Alert } from '../../components';
 	let selectedCell = $state('No cell selected');
 	let sheetAvailable = $state(false);
 

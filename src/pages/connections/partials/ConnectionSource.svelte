@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Button } from '../../../components/shared/index';
+	import { Button } from '../../../components';
 	import type { Source } from '../../../types';
 	import ConnectionDimensions from './ConnectionDimensions.svelte';
 

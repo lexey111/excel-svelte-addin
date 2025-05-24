@@ -7,11 +7,7 @@
 
 	let { connection = $bindable() }: Props = $props();
 
-	let validName = $state(false);
-
-	$effect(() => {
-		validName = !!connection.name.trim();
-	});
+	let validName = $derived(!!connection.name.trim());
 </script>
 
 <h3>Connection parameters</h3>
