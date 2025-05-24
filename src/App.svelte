@@ -20,7 +20,7 @@
 		}
 
 		if ($currentPage === '_login' && value.isAuthorized && !value.isFetching) {
-			$currentPage = 'profile';
+			$currentPage = 'connections';
 		}
 
 		if ($currentPage !== '_login' && !value.isAuthorized && !value.isFetching) {

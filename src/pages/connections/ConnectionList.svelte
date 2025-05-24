@@ -82,7 +82,7 @@
 			return;
 		}
 
-		currentConnection = { ...$connections[connectionIdx] };
+		currentConnection = JSON.parse(JSON.stringify($connections[connectionIdx]));
 
 		connectionModalOpen = true;
 		connectionModalMode = 'edit';
