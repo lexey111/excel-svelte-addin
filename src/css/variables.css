@@ -1,0 +1,40 @@
+:root {
+	--app-color: #213547;
+	--app-background-color: #ffffff;
+
+	--border-color: #eef;
+	--border-color-darker: #ccdf;
+
+	--border-active-ring: 0 0 0 2px var(--accent-color);
+	--border-error-ring: 0 0 0 2px var(--error-color);
+	--border-hover-ring: 0 0 0 2px var(--shade-background);
+
+	--border-radius: 6px;
+	--border-radius-large: 10px;
+	--border-radius-small: 3px;
+
+	--placeholder-color: #ccc;
+
+	--default-transition: all 0.15s ease;
+
+	--shade-background: #f9f9f9;
+	--shade-background-darker: #ededed;
+
+	--accent-color: #ffa500;
+	--primary-color: #387adf;
+	--primary-contrast-color: #fff;
+
+	--dangerous-color: #fc4100;
+	--dangerous-contrast-color: #fff;
+
+	--secondary-color: #e9e9e9;
+	--secondary-contrast-color: #222;
+
+	--remark-color: #999;
+
+	--error-color: #9c0935;
+	--error-contrast-color: #fff;
+	--error-color-light: #fae1dc;
+	--error-color-border: hsl(from var(--error-color-light) h s calc(l - 10));
+	--error-color-shadow: hsl(from var(--error-color-light) h calc(s + 5) calc(l - 5));
+}

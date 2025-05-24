@@ -1,0 +1,167 @@
+<script lang="ts">
+	import type { Snippet } from 'svelte';
+
+	import Spinner from './Spinner.svelte';
+	import { AddIcon, DeleteIcon } from '../icons';
+
+	type Props = {
+		children?: Snippet;
+		onClick: () => void;
+		loading?: boolean;
+		disabled?: boolean;
+		variant?: 'primary' | 'secondary' | 'dangerous' | 'ghost';
+		size?: 'small' | 'normal';
+		icon?: 'delete' | 'add';
+	};
+
+	let {
+		children,
+		onClick,
+		loading,
+		disabled,
+		variant = 'primary',
+		size = 'normal',
+		icon
+	}: Props = $props();
+</script>
+
+<button
+	onclick={onClick}
+	{disabled}
+	class:loading
+	class={[variant, size, icon ? 'with-icon' : ''].join(' ')}
+>
+	<div class="button-content">
+		{#if loading}
+			<div class="button-spinner">
+				<Spinner />
+			</div>
+		{/if}
+
+		{#if icon === 'delete'}
+			<DeleteIcon />
+		{/if}
+
+		{#if icon === 'add'}
+			<AddIcon />
+		{/if}
+
+		{#if children}
+			<div class="button-text">
+				{@render children?.()}
+			</div>
+		{/if}
+	</div>
+</button>
+
+<style>
+	:global button {
+		border-radius: var(--border-radius);
+		border: none;
+		padding: 0.6em 3em;
+		font-size: 1em;
+		font-weight: 500;
+		font-family: inherit;
+		cursor: pointer;
+
+		background: var(--primary-color);
+		color: var(--primary-contrast-color);
+		transition: var(--default-transition);
+
+		display: flex;
+		flex-flow: row wrap;
+		align-items: center;
+		align-content: center;
+		justify-content: center;
+		gap: 6px;
+		font-size: 0.8em;
+		height: 36px;
+		width: auto;
+		flex-grow: 0;
+		flex-shrink: 0;
+
+		&:hover {
+			filter: brightness(0.9);
+		}
+
+		&:focus,
+		&:focus-visible {
+			outline: none;
+			box-shadow: var(--border-active-ring);
+			background: var(--primary-color);
+			color: var(--primary-contrast-color);
+			filter: brightness(1.2);
+		}
+
+		&:disabled {
+			pointer-events: none;
+			filter: grayscale(1) brightness(1.2);
+			opacity: 0.4;
+		}
+
+		&.dangerous {
+			background: var(--dangerous-color);
+			color: var(--dangerous-contrast-color);
+		}
+		&.ghost {
+			background: transparent;
+			color: #222;
+			border: 1px solid var(--secondary-color);
+		}
+		&.secondary {
+			background: var(--secondary-color);
+			color: var(--secondary-contrast-color);
+		}
+		&.small {
+			padding: 0.6em 1em;
+			font-size: 1em;
+			font-size: 0.6em;
+			height: auto;
+			width: auto;
+
+			svg.icon {
+				width: 16px;
+				height: 16px;
+			}
+		}
+		&.with-icon {
+			padding: 0.6em 1em;
+		}
+	}
+
+	:global .button-content {
+		transition: all 0.2s ease;
+		display: flex;
+		flex-flow: row nowrap;
+		align-items: center;
+		gap: 6px;
+
+		svg.icon {
+			width: 20px;
+			height: 20px;
+		}
+	}
+
+	.loading {
+		padding: 0.6em 2em;
+		.button-content {
+			position: relative;
+
+			.button-text {
+				transform: translateX(0.7em);
+			}
+
+			.button-spinner {
+				position: absolute;
+				left: -0.7em;
+				top: 50%;
+				transform: translateY(-40%);
+			}
+		}
+	}
+	@container (width < 300px) {
+		button {
+			padding: 0.6em 1em;
+		}
+	}
+</style>

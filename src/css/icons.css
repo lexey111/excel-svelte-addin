@@ -1,0 +1,12 @@
+.icon.inline {
+	width: 21px;
+	height: 21px;
+	display: inline-block;
+	line-height: 21px;
+	vertical-align: middle;
+	margin-inline-end: 0.2em;
+}
+
+.icon.dangerous {
+	fill: var(--dangerous-color);
+}

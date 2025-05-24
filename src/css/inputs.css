@@ -1,0 +1,50 @@
+@import 'variables.css';
+
+input[type='text'],
+input[type='email'],
+input[type='number'],
+select,
+input[type='password'] {
+	height: 36px;
+	border-radius: var(--border-radius);
+	border: 1px solid var(--border-color);
+	box-sizing: border-box;
+	padding: 0 0.4rem;
+	outline: none;
+	transition: var(--default-transition);
+	display: inline-flex;
+	flex-flow: row nowrap;
+	width: 100%;
+	font-size: 0.9rem;
+
+	&:hover {
+		border-color: var(--border-color-darker);
+		box-shadow: var(--border-hover-ring);
+	}
+
+	&:focus,
+	&:focus-visible {
+		box-shadow: var(--border-active-ring);
+		border-color: #fff;
+	}
+
+	&::placeholder {
+		color: var(--placeholder-color);
+		opacity: 0.9;
+	}
+
+	&[aria-invalid='true'] {
+		border: 1px solid var(--error-color);
+		background: hsl(from var(--error-color-light) h s calc(l + 4));
+		&::placeholder {
+			color: var(--error-color);
+			opacity: 0.4;
+		}
+
+		&:focus,
+		&:focus-visible {
+			border-color: var(--error-color);
+			box-shadow: var(--border-error-ring);
+		}
+	}
+}
