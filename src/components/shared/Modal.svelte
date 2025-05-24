@@ -91,6 +91,14 @@
 			box-shadow: none;
 			max-width: 100vw;
 			max-height: 100vh;
+
+			& > .modal-header {
+				background-color: var(--shade-background-darker);
+			}
+			& > .modal-footer {
+				background-color: var(--shade-background-darker);
+				height: 56px;
+			}
 		}
 	}
 
@@ -98,11 +106,12 @@
 		display: flex;
 		flex-flow: row nowrap;
 		position: relative;
-		align-items: flex-end;
+		align-items: center;
 		gap: 6px;
 		padding: 0 0 0 2em;
 		box-sizing: border-box;
 		font-weight: bold;
+		transition: var(--default-transition);
 	}
 
 	.modal-header-close {
@@ -129,6 +138,7 @@
 		height: 64px;
 		padding: 0 2em;
 		gap: 6px;
+		transition: var(--slow-transition);
 	}
 
 	dialog::backdrop {

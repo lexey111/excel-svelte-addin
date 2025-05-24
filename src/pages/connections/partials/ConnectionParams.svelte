@@ -15,7 +15,7 @@
 	});
 </script>
 
-<h3>Connection parameters</h3>
+<h2>Connection parameters</h2>
 
 <fieldset>
 	<label for="name"><b>Name</b><span class="mandatory-sign">*</span></label>

@@ -72,8 +72,8 @@
 		font-family: inherit;
 		cursor: pointer;
 
-		background: var(--primary-color);
-		color: var(--primary-contrast-color);
+		background: var(--accent-color);
+		color: var(--accent-contrast-color);
 		transition: var(--default-transition);
 
 		display: flex;
@@ -88,8 +88,15 @@
 		flex-grow: 0;
 		flex-shrink: 0;
 
+		svg {
+			opacity: 0.8;
+		}
+
 		&:hover {
 			filter: brightness(0.9);
+			svg {
+				opacity: 1;
+			}
 		}
 
 		&:focus,

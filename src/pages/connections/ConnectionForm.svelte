@@ -32,6 +32,10 @@
 			transform: translateY(-2px);
 		}
 
+		h2:first-of-type {
+			margin-top: 0;
+		}
+
 		fieldset {
 			display: grid;
 			grid-template-columns: auto 1fr;
