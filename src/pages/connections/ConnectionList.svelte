@@ -5,25 +5,25 @@
 	import ConnectionForm from './ConnectionForm.svelte';
 	import { ConnectionItem } from './partials';
 
-	let editConnectionModalOpen = $state(false);
+	let showEditConnectionModal = $state(false);
 	let connectionModalMode = $state<'edit' | 'create'>('create');
 
 	let currentConnection = $state<Connection | undefined>(undefined);
 
 	const handleNewConnection = () => {
-		editConnectionModalOpen = true;
+		showEditConnectionModal = true;
 		connectionModalMode = 'create';
 
 		currentConnection = createConnection();
 	};
 
 	const closeConnectionModal = () => {
-		editConnectionModalOpen = false;
+		showEditConnectionModal = false;
 	};
 
 	const confirmConnectionModal = async () => {
 		if (!currentConnection) {
-			editConnectionModalOpen = false;
+			showEditConnectionModal = false;
 			return;
 		}
 
@@ -38,7 +38,7 @@
 			});
 		}
 
-		editConnectionModalOpen = false;
+		showEditConnectionModal = false;
 	};
 
 	let showDeleteConnectionConfirmation = $state(false);
@@ -53,11 +53,17 @@
 
 	const confirmDeleteConnection = async () => {
 		showDeleteConnectionConfirmation = false;
+		showEditConnectionModal = false;
+
 		if (!deleteConnectionContext.id) {
 			return;
 		}
 
 		$connections.data = $connections.data.filter((c) => c.id !== deleteConnectionContext.id);
+
+		deleteConnectionContext.id = '';
+		deleteConnectionContext.name = '';
+		currentConnection = undefined;
 	};
 
 	const hanldeShowRemoveConnection = (connectionId?: string) => {
@@ -84,7 +90,7 @@
 
 		currentConnection = JSON.parse(JSON.stringify($connections.data[connectionIdx]));
 
-		editConnectionModalOpen = true;
+		showEditConnectionModal = true;
 		connectionModalMode = 'edit';
 	};
 
@@ -116,11 +122,7 @@
 
 <div class="connection-list">
 	{#each $connections.data as connection (connection.id)}
-		<ConnectionItem
-			{connection}
-			onShowRemoveConnectionModal={hanldeShowRemoveConnection}
-			onEditConnection={handleEditConnection}
-		/>
+		<ConnectionItem {connection} onEditConnection={handleEditConnection} />
 	{/each}
 </div>
 
@@ -137,6 +139,15 @@
 {/snippet}
 
 {#snippet editConnectionFooter()}
+	{#if connectionModalMode === 'edit'}
+		<Button
+			variant="dangerous"
+			onClick={() => hanldeShowRemoveConnection(currentConnection?.id)}
+			icon="delete">Delete</Button
+		>
+	{/if}
+	<span style="margin-right: auto;"></span>
+
 	<Button variant="secondary" onClick={closeConnectionModal}>Cancel</Button>
 	<Button variant="primary" onClick={confirmConnectionModal} disabled={!connectionCanBeSaved()}>
 		{#if connectionModalMode === 'create'}
@@ -148,8 +159,8 @@
 {/snippet}
 
 <Modal
-	open={editConnectionModalOpen}
-	onClose={() => (editConnectionModalOpen = false)}
+	open={showEditConnectionModal}
+	onClose={() => (showEditConnectionModal = false)}
 	size="full-auto"
 	header={editConnectionHeader}
 	footer={editConnectionFooter}
@@ -180,6 +191,7 @@
 	:global .connection-list {
 		display: flex;
 		flex-flow: column wrap;
+		margin: 2em 0;
 
 		.connection-item {
 			display: flex;
@@ -197,39 +209,63 @@
 			.connection-content {
 				padding: 12px;
 				display: grid;
-				grid-template-columns: 1fr 40px;
+				grid-template-columns: 16px 1fr 36px;
 				gap: 6px;
 				flex-flow: row nowrap;
 				align-items: center;
 				width: 100%;
 				transition: var(--transition-default);
 
+				.connection-icon {
+					display: inline-flex;
+					align-self: flex-start;
+					opacity: 0.6;
+				}
+
 				.connection-name {
-					font-weight: bold;
-					padding: 0 0 0 1em;
+					font-weight: 500;
+					display: flex;
+					align-self: flex-start;
+					flex-flow: column wrap;
+					line-height: 1.4em;
 				}
 
 				.connection-target {
+					line-height: 1.2em;
+					margin: 0.4em 0 0 0;
+					padding: 0;
 					font-weight: normal;
 					font-size: var(--font-small);
 					color: var(--secondary-text-color);
+					b {
+						font-weight: 500;
+					}
 				}
 
 				.connection-sources {
 					font-weight: normal;
 					font-size: var(--font-small);
 					color: var(--secondary-text-color);
-				}
-
-				button {
-					margin-left: auto;
-					margin-right: 1em;
+					b {
+						font-weight: 500;
+					}
 				}
 			}
 
 			@container (width < 400px) {
 				.connection-content {
+					grid-template-columns: 14px 1fr 36px;
 					padding: 6px;
+				}
+			}
+
+			@container (width < 300px) {
+				.connection-content {
+					grid-template-columns: 0 1fr 36px;
+
+					.connection-icon {
+						opacity: 0;
+					}
 				}
 			}
 		}

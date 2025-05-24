@@ -6,3 +6,6 @@ export { default as ExclamationIcon } from './ExclamationIcon.svelte';
 export { default as UserIcon } from './UserIcon.svelte';
 export { default as TrackingIcon } from './TrackingIcon.svelte';
 export { default as ConnectionsIcon } from './ConnectionsIcon.svelte';
+export { default as ChevronLeftIcon } from './ChevronLeftIcon.svelte';
+export { default as ChevronRightIcon } from './ChevronRightIcon.svelte';
+export { default as IconSelector } from './IconSelector.svelte';

@@ -1,0 +1,30 @@
+<script lang="ts">
+	import { AddIcon, CloseIcon, DeleteIcon, ChevronLeftIcon, ChevronRightIcon } from '../icons';
+	import type { Icon } from '../../types';
+
+	type Props = {
+		icon?: Icon;
+	};
+
+	let { icon }: Props = $props();
+</script>
+
+{#if icon === 'delete'}
+	<DeleteIcon />
+{/if}
+
+{#if icon === 'add'}
+	<AddIcon />
+{/if}
+
+{#if icon === 'close'}
+	<CloseIcon />
+{/if}
+
+{#if icon === 'left'}
+	<ChevronLeftIcon />
+{/if}
+
+{#if icon === 'right'}
+	<ChevronRightIcon />
+{/if}

@@ -2,7 +2,8 @@
 	import type { Snippet } from 'svelte';
 
 	import Spinner from './Spinner.svelte';
-	import { AddIcon, CloseIcon, DeleteIcon } from '../icons';
+	import type { Icon } from '../../types';
+	import { IconSelector } from '../icons';
 
 	type Props = {
 		children?: Snippet;
@@ -10,9 +11,9 @@
 		loading?: boolean;
 		disabled?: boolean;
 		autofocus?: boolean;
-		variant?: 'primary' | 'secondary' | 'dangerous' | 'ghost' | 'white';
+		variant?: 'primary' | 'secondary' | 'dangerous' | 'ghost' | 'white' | 'text';
 		size?: 'small' | 'normal' | 'square24' | 'square36';
-		icon?: 'delete' | 'add' | 'close';
+		icon?: Icon;
 	};
 
 	let {
@@ -42,17 +43,7 @@
 			</div>
 		{/if}
 
-		{#if icon === 'delete'}
-			<DeleteIcon />
-		{/if}
-
-		{#if icon === 'add'}
-			<AddIcon />
-		{/if}
-
-		{#if icon === 'close'}
-			<CloseIcon />
-		{/if}
+		<IconSelector {icon} />
 
 		{#if children}
 			<div class="button-text">
@@ -102,8 +93,8 @@
 		&:focus-visible {
 			outline: none;
 			box-shadow: var(--border-active-ring);
-			background: var(--primary-color);
-			color: var(--primary-contrast-color);
+			background: var(--accent-color);
+			color: var(--accent-contrast-color);
 			filter: brightness(1.2);
 		}
 
@@ -117,10 +108,33 @@
 			background: var(--dangerous-color);
 			color: var(--dangerous-contrast-color);
 		}
+
 		&.ghost {
 			background: transparent;
 			color: #222;
-			border: 1px solid var(--secondary-color);
+			box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
+
+			&:hover {
+				background: rgba(0, 0, 0, 0.05);
+			}
+			&:focus {
+				background: rgba(0, 0, 0, 0.05);
+				box-shadow: var(--border-active-ring);
+			}
+		}
+
+		&.text {
+			background: transparent;
+			color: #222;
+
+			&:hover {
+				background: rgba(0, 0, 0, 0.05);
+			}
+
+			&:focus {
+				background: rgba(0, 0, 0, 0.05);
+				box-shadow: var(--border-active-ring);
+			}
 		}
 		&.white {
 			background: #fff;
@@ -193,7 +207,8 @@
 	}
 
 	.loading {
-		padding: 0.6em 2em;
+		padding: 0.6em 3em;
+
 		.button-content {
 			position: relative;
 
@@ -203,7 +218,7 @@
 
 			.button-spinner {
 				position: absolute;
-				left: -0.7em;
+				left: -1em;
 				top: 50%;
 				transform: translateY(-40%);
 			}

@@ -11,12 +11,12 @@
 
 <style>
 	.spinner {
-		border: 2px solid #f3f3f3;
+		border: 2px solid rgba(0, 0, 0, 0.1);
 		border-top: 2px solid #3498db;
 		border-radius: 50%;
 		box-sizing: border-box;
-		width: 1em;
-		height: 1em;
+		width: 1.2em;
+		height: 1.2em;
 		animation: spin 2s linear infinite;
 	}
 
