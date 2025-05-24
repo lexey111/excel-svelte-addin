@@ -39,14 +39,15 @@
 		color: var(--error-color);
 		background-color: var(--error-color-light);
 		padding: 2em;
-		border-radius: var(--border-radius-large);
-		border: 2px solid var(--error-color-border);
+		border-radius: var(--border-radius);
+		border: 1px solid var(--error-color-border);
 		animation-name: fadeIn;
 		animation-duration: 0.4s;
 		animation-play-state: initial;
 		animation-fill-mode: forwards;
 		animation-iteration-count: 1;
 		opacity: 0.1;
+		text-align: center;
 	}
 
 	.alert-icon {
@@ -85,6 +86,7 @@
 		gap: 6px;
 		align-items: center;
 		justify-content: center;
+		font-weight: 500;
 	}
 
 	.alert-message-text {

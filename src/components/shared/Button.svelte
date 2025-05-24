@@ -2,7 +2,7 @@
 	import type { Snippet } from 'svelte';
 
 	import Spinner from './Spinner.svelte';
-	import { AddIcon, DeleteIcon } from '../icons';
+	import { AddIcon, CloseIcon, DeleteIcon } from '../icons';
 
 	type Props = {
 		children?: Snippet;
@@ -10,8 +10,8 @@
 		loading?: boolean;
 		disabled?: boolean;
 		variant?: 'primary' | 'secondary' | 'dangerous' | 'ghost';
-		size?: 'small' | 'normal';
-		icon?: 'delete' | 'add';
+		size?: 'small' | 'normal' | 'square24';
+		icon?: 'delete' | 'add' | 'close';
 	};
 
 	let {
@@ -44,6 +44,10 @@
 
 		{#if icon === 'add'}
 			<AddIcon />
+		{/if}
+
+		{#if icon === 'close'}
+			<CloseIcon />
 		{/if}
 
 		{#if children}
@@ -122,6 +126,20 @@
 			svg.icon {
 				width: 16px;
 				height: 16px;
+			}
+		}
+		&.square24 {
+			padding: 0 !important;
+			height: 24px;
+			width: 24px;
+			min-height: 24px;
+			min-width: 24px;
+			max-height: 24px;
+			max-width: 24px;
+
+			svg.icon {
+				width: 14px;
+				height: 14px;
 			}
 		}
 		&.with-icon {

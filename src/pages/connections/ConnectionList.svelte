@@ -96,12 +96,11 @@
 		onShowRemoveConnectionModal={hanldeShowRemoveConnection}
 		onEditConnection={handleEditConnection}
 	/>
-{:else}
-	<h3>There are no connections available yet.</h3>
-	<p>You can create your first one by clicking the button below.</p>
 {/each}
-<p>&nbsp;</p>
-<Button onClick={handleNewConnection} icon="add">New connection</Button>
+
+<div class="page-actions">
+	<Button onClick={handleNewConnection} icon="add">New connection</Button>
+</div>
 
 {#snippet header()}
 	{#if connectionModalMode === 'create'}

@@ -30,15 +30,28 @@ h4 {
 }
 
 a {
-	font-weight: 500;
-	color: #646cff;
+	font-weight: normal;
+	color: var(--primary-color);
 	text-decoration: inherit;
+	transition: var(--default-transition);
 }
 
 a:hover {
-	color: #747bff;
+	color: hsl(from var(--primary-color) h s calc(l - 10));
+	text-decoration: underline;
+	text-underline-offset: 4px;
 }
 
 .dangerous {
 	color: var(--dangerous-color);
+}
+
+.description {
+	font-size: 0.8em;
+	color: var(--remark-color);
+}
+
+.page-actions {
+	display: flex;
+	margin-top: 1em;
 }

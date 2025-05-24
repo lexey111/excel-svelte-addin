@@ -85,11 +85,6 @@
 			}
 		}
 
-		.description {
-			font-size: 0.8em;
-			color: var(--remark-color);
-		}
-
 		.source {
 			h4 {
 				display: flex;

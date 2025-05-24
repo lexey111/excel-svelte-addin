@@ -12,7 +12,8 @@
 	let { connection, idx, onShowRemoveConnectionModal, onEditConnection }: Props = $props();
 </script>
 
-<div class="connection-item">
+<!-- svelte-ignore a11y_no_static_element_interactions -->
+<div class="connection-item" ondblclick={() => onEditConnection(connection.id)}>
 	<div class="connection-number">
 		{idx + 1}
 	</div>

@@ -28,7 +28,7 @@
 	<h4>
 		Source #{index + 1}
 		<span class="spacer"></span>
-		<Button onClick={() => onShowRemoveModal(id)} size="small" variant="secondary" icon="delete">
+		<Button onClick={() => onShowRemoveModal(id)} size="small" variant="ghost" icon="delete">
 			Delete source
 		</Button>
 	</h4>

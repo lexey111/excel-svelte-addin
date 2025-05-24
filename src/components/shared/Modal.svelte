@@ -31,8 +31,9 @@
 <dialog bind:this={ref} onclose={handleClose} class={'modal ' + size}>
 	<div class="modal-header">
 		{@render header?.()}
-		<!-- svelte-ignore a11y_invalid_attribute -->
-		<a href="#" class="modal-header-close" onclick={handleClose}>&times;</a>
+		<div class="modal-header-close">
+			<Button onClick={handleClose} variant="secondary" size="square24" icon="close"></Button>
+		</div>
 	</div>
 
 	<div class="modal-body">
@@ -107,16 +108,7 @@
 	.modal-header-close {
 		margin-left: auto;
 		align-self: center;
-		padding: 0 1em 0 0;
-		line-height: 1;
-		font-size: 20px;
-		font-weight: normal;
-		color: #222;
-		transition: var(--default-transition);
-
-		&:hover {
-			transform: scale(1.2);
-		}
+		margin-right: 0.7em;
 	}
 
 	.modal-body {
