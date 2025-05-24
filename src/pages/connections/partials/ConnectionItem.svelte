@@ -4,20 +4,15 @@
 
 	type Props = {
 		connection: Connection;
-		idx: number;
 		onShowRemoveConnectionModal: (connectionId?: string) => void;
 		onEditConnection: (connectionId?: string) => void;
 	};
 
-	let { connection, idx, onShowRemoveConnectionModal, onEditConnection }: Props = $props();
+	let { connection, onShowRemoveConnectionModal, onEditConnection }: Props = $props();
 </script>
 
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <div class="connection-item" ondblclick={() => onEditConnection(connection.id)}>
-	<div class="connection-number">
-		{idx + 1}
-	</div>
-
 	<div class="connection-name">
 		<!-- svelte-ignore a11y_invalid_attribute -->
 		<a href="#" onclick={() => onEditConnection(connection.id)}>
@@ -42,7 +37,7 @@
 
 	<Button
 		onClick={() => onShowRemoveConnectionModal(connection.id)}
-		size="small"
+		size="square36"
 		variant="secondary"
 		icon="delete"
 	></Button>

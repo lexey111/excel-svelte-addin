@@ -34,7 +34,7 @@
 
 	<Button
 		onClick={() => onShowRemoveDimensionModal(sourceId, id)}
-		size="small"
+		size="square36"
 		variant="secondary"
 		icon="delete"
 	></Button>

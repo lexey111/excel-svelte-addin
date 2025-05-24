@@ -100,7 +100,7 @@
 			border-radius: var(--border-radius);
 			padding: 1em;
 			margin-bottom: 1em;
-			box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+			box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
 		}
 
 		.source-dimensions {
@@ -175,6 +175,7 @@
 				}
 			}
 		}
+
 		@container (width < 300px) {
 			.dimension {
 				display: grid;

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { WarningIcon, Button } from '../../../components';
+	import { ExclamationIcon, Button } from '../../../components';
 	import type { DimensionLocator } from '../../../types';
 	import ConnectionDimension from './ConnectionDimension.svelte';
 
@@ -21,7 +21,7 @@
 <div class="source-dimensions">
 	<h5 class={locators.length === 0 ? 'dangerous' : ''}>
 		Dimensions {#if locators.length === 0}
-			<WarningIcon inline={true} color="dangerous" />
+			<ExclamationIcon inline={true} color="dangerous" />
 		{:else}
 			[{locators.length}]
 		{/if}

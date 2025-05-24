@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { Button, Modal, WarningIcon } from '../../../components';
+	import { Button, Modal } from '../../../components';
+	import ExclamationIcon from '../../../components/icons/ExclamationIcon.svelte';
 	import { makeid } from '../../../lib/utils';
 	import type { Connection } from '../../../types';
 	import ConnectionSource from './ConnectionSource.svelte';
@@ -94,7 +95,7 @@
 
 <h3 class={connection.sources.length === 0 ? 'dangerous' : ''}>
 	Sources {#if connection.sources.length === 0}
-		<WarningIcon inline={true} color="dangerous" />
+		<ExclamationIcon inline={true} color="dangerous" />
 	{:else}
 		[{connection.sources.length}]
 	{/if}
@@ -120,14 +121,16 @@
 	</p>
 {/each}
 
-<Button onClick={handleAddSource} icon="add" variant="secondary">Add source</Button>
+<div class="page-actions">
+	<Button onClick={handleAddSource} icon="add" variant="secondary">Add source</Button>
+</div>
 
 {#snippet removeSourceHeader()}
 	Delete source
 {/snippet}
 
 {#snippet removeSourceFooter()}
-	<Button variant="secondary" onClick={cancelDeleteSource}>Cancel</Button>
+	<Button variant="secondary" onClick={cancelDeleteSource} autofocus={true}>Cancel</Button>
 	<Button variant="dangerous" onClick={confirmRemoveSource}>Delete</Button>
 {/snippet}
 
@@ -146,7 +149,7 @@
 {/snippet}
 
 {#snippet removeDimensionFooter()}
-	<Button variant="secondary" onClick={cancelDeleteDimension}>Cancel</Button>
+	<Button variant="secondary" onClick={cancelDeleteDimension} autofocus={true}>Cancel</Button>
 	<Button variant="dangerous" onClick={confirmDeleteDimension}>Delete</Button>
 {/snippet}
 

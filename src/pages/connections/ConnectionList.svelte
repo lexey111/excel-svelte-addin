@@ -89,10 +89,9 @@
 	};
 </script>
 
-{#each $connections as connection, idx (connection.id)}
+{#each $connections as connection (connection.id)}
 	<ConnectionItem
 		{connection}
-		{idx}
 		onShowRemoveConnectionModal={hanldeShowRemoveConnection}
 		onEditConnection={handleEditConnection}
 	/>
@@ -136,7 +135,7 @@
 {/snippet}
 
 {#snippet removeConnectionFooter()}
-	<Button variant="secondary" onClick={cancelDeleteConnection}>Cancel</Button>
+	<Button variant="secondary" onClick={cancelDeleteConnection} autofocus={true}>Cancel</Button>
 	<Button variant="dangerous" onClick={confirmDeleteConnection}>Delete</Button>
 {/snippet}
 
@@ -158,24 +157,15 @@
 		width: 100%;
 		transition: var(--default-transition);
 		border-radius: var(--border-radius);
-		padding: 0.5em;
+		padding: 0.5em 0;
 
 		&:hover {
 			background: var(--secondary-color);
 		}
 
-		.connection-number {
-			display: flex;
-			width: 60px;
-			justify-content: center;
-			align-self: center;
-			font-size: 0.9em;
-			opacity: 0.5;
-			flex-shrink: 0;
-		}
 		.connection-name {
 			font-weight: bold;
-			padding-right: 1em;
+			padding: 0 0 0 1em;
 		}
 
 		.connection-target {
@@ -190,9 +180,7 @@
 
 		button {
 			margin-left: auto;
-			width: 36px;
-			height: 36px;
-			flex-shrink: 0;
+			margin-right: 1em;
 		}
 	}
 </style>

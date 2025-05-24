@@ -32,7 +32,7 @@
 	<div class="modal-header">
 		{@render header?.()}
 		<div class="modal-header-close">
-			<Button onClick={handleClose} variant="secondary" size="square24" icon="close"></Button>
+			<Button onClick={handleClose} variant="white" size="square24" icon="close"></Button>
 		</div>
 	</div>
 

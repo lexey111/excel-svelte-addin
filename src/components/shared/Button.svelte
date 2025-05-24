@@ -9,8 +9,9 @@
 		onClick: () => void;
 		loading?: boolean;
 		disabled?: boolean;
-		variant?: 'primary' | 'secondary' | 'dangerous' | 'ghost';
-		size?: 'small' | 'normal' | 'square24';
+		autofocus?: boolean;
+		variant?: 'primary' | 'secondary' | 'dangerous' | 'ghost' | 'white';
+		size?: 'small' | 'normal' | 'square24' | 'square36';
 		icon?: 'delete' | 'add' | 'close';
 	};
 
@@ -19,16 +20,19 @@
 		onClick,
 		loading,
 		disabled,
+		autofocus,
 		variant = 'primary',
 		size = 'normal',
 		icon
 	}: Props = $props();
 </script>
 
+<!-- svelte-ignore a11y_autofocus -->
 <button
 	onclick={onClick}
 	{disabled}
 	class:loading
+	{autofocus}
 	class={[variant, size, icon ? 'with-icon' : ''].join(' ')}
 >
 	<div class="button-content">
@@ -112,6 +116,11 @@
 			color: #222;
 			border: 1px solid var(--secondary-color);
 		}
+		&.white {
+			background: #fff;
+			color: #222;
+			border: none;
+		}
 		&.secondary {
 			background: var(--secondary-color);
 			color: var(--secondary-contrast-color);
@@ -132,6 +141,8 @@
 			padding: 0 !important;
 			height: 24px;
 			width: 24px;
+			flex-shrink: 0;
+			flex-grow: 0;
 			min-height: 24px;
 			min-width: 24px;
 			max-height: 24px;
@@ -140,6 +151,22 @@
 			svg.icon {
 				width: 14px;
 				height: 14px;
+			}
+		}
+		&.square36 {
+			padding: 0 !important;
+			height: 36px;
+			width: 36px;
+			flex-shrink: 0;
+			flex-grow: 0;
+			min-height: 36px;
+			min-width: 36px;
+			max-height: 36px;
+			max-width: 36px;
+
+			svg.icon {
+				width: 18px;
+				height: 18px;
 			}
 		}
 		&.with-icon {
