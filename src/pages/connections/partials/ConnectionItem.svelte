@@ -30,13 +30,19 @@
 					{/if}
 				</div>
 			{:else}
-				<div class="connection-target">Book and sheet are not specified</div>
+				<div class="connection-target">
+					<i> Neither Book nor Sheet are specified </i>
+				</div>
 			{/if}
 
 			{#if connection.sources.length > 0}
 				<div class="connection-sources">
-					<b>Sources</b>: {connection.sources.length},
-					{connection.sources.map((s) => s.cellAddress).join(', ')}
+					<b>Source{connection.sources.length > 1 ? 's' : ''}</b>: {connection.sources.length}
+					<div class="connection-sources-cells">
+						{#each connection.sources as source (source.id)}
+							<span class="source-cell-address">{source.cellAddress}</span>
+						{/each}
+					</div>
 				</div>
 			{/if}
 		</div>
@@ -77,14 +83,15 @@
 			}
 
 			.connection-target {
-				line-height: 1.2em;
+				line-height: 1.4em;
 				margin: 0.4em 0 0 0;
 				padding: 0;
 				font-weight: normal;
 				font-size: var(--font-small);
 				color: var(--secondary-text-color);
+
 				b {
-					font-weight: 500;
+					font-weight: 700;
 				}
 			}
 
@@ -92,8 +99,22 @@
 				font-weight: normal;
 				font-size: var(--font-small);
 				color: var(--secondary-text-color);
+
+				.connection-sources-cells {
+					display: inline-flex;
+					align-items: center;
+					gap: 4px;
+				}
 				b {
-					font-weight: 500;
+					font-weight: 700;
+				}
+
+				.source-cell-address {
+					font-weight: normal;
+					background: var(--success-background);
+					border: 1px solid var(--success-border-color);
+					color: var(--success-color);
+					padding: 0 4px;
 				}
 			}
 		}
