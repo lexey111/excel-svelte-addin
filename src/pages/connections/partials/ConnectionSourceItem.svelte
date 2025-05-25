@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Button, LocationIcon } from '../../../components';
+	import { isSourceCorrect } from '../../../stores';
 	import type { Source } from '../../../types';
 
 	type Props = {
@@ -10,14 +11,7 @@
 	let { source = $bindable(), onEditSource }: Props = $props();
 
 	const sourceCanBeSaved = $derived(() => {
-		return (
-			!!source.cellAddress.trim() &&
-			!!source.entityName.trim() &&
-			!!source.entityType.trim() &&
-			!!source.version.trim() &&
-			source.locators.length > 0 &&
-			source.locators.every((locator) => !!locator.name.trim() && !!locator.value.trim())
-		);
+		return isSourceCorrect(source);
 	});
 </script>
 

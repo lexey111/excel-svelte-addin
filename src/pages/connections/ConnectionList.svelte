@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Button, Modal, LayeredModal } from '../../components';
-	import { connections, createConnection } from '../../stores';
+	import { connections, createConnection, isConnectionCorrect } from '../../stores';
 	import type { Connection } from '../../types';
 	import ConnectionForm from './ConnectionForm.svelte';
 	import { ConnectionItem } from './partials';
@@ -103,20 +103,7 @@
 			(c) => c.id !== currentConnection!.id && c.name.trim() === currentConnection!.name.trim()
 		);
 
-		return (
-			!alreadyExists &&
-			!!currentConnection.name.trim() &&
-			currentConnection.sources.length > 0 &&
-			currentConnection.sources.every(
-				(source) =>
-					!!source.cellAddress.trim() &&
-					!!source.entityName.trim() &&
-					!!source.entityType.trim() &&
-					!!source.version.trim() &&
-					source.locators.length > 0 &&
-					source.locators.every((locator) => !!locator.name.trim() && !!locator.value.trim())
-			)
-		);
+		return !alreadyExists && isConnectionCorrect(currentConnection);
 	});
 </script>
 

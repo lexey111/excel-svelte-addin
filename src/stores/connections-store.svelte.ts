@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
-import type { Connection, ConnectionsStore } from '../types';
+import type { Connection, ConnectionsStore, Source } from '../types';
 import { makeid } from '../lib/utils';
 
 export const connections = writable<ConnectionsStore>({
@@ -17,6 +17,35 @@ export const createConnection = (): Connection => {
 		sheetTitle: undefined,
 		sources: []
 	};
+};
+
+export const isSourceCorrect = (source?: Source): boolean => {
+	if (!source) {
+		return false;
+	}
+
+	return (
+		!!(source.cellAddress || '').trim() &&
+		!!(source.entityName || '').trim() &&
+		!!(source.entityType || '').trim() &&
+		!!(source.version || '').trim() &&
+		source.locators.length > 0 &&
+		source.locators.every(
+			(locator) => !!(locator.name || '').trim() && !!(locator.value || '').trim()
+		)
+	);
+};
+
+export const isConnectionCorrect = (connection?: Connection): boolean => {
+	if (!connection) {
+		return false;
+	}
+
+	return (
+		!!(connection.name || '').trim() &&
+		connection.sources.length > 0 &&
+		connection.sources.every(isSourceCorrect)
+	);
 };
 
 export const makeFakeConnections = (): Connection[] => {
