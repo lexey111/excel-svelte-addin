@@ -1,5 +1,6 @@
 import type { User, UserData } from '../types';
 import { writable } from 'svelte/store';
+import { appState } from './app-store.svelte';
 
 export const userData = writable<UserData>({
 	user: null,
@@ -37,6 +38,11 @@ export function setFakeUser() {
 		isFetching: true
 	});
 
+	appState.update((s) => ({
+		...s,
+		isBusy: true
+	}));
+
 	setTimeout(() => {
 		userData.set({
 			isAuthorized: true,
@@ -47,5 +53,10 @@ export function setFakeUser() {
 				name: 'test user'
 			}
 		});
+
+		appState.update((s) => ({
+			...s,
+			isBusy: false
+		}));
 	}, 500);
 }

@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { currentPage, officeState, userData } from '../../stores';
+	import { appState, currentPage, officeState, userData } from '../../stores';
 	import { ConnectionsIcon, TrackingIcon, UserIcon } from '../icons';
 </script>
 
 {#if $officeState.isOfficeInitialized && $userData.isAuthorized}
-	<div class="header">
+	<div class="header" class:disabled={$appState.isBusy}>
 		<!-- svelte-ignore a11y_invalid_attribute -->
 		<a
 			class="menu-item"
@@ -54,6 +54,14 @@
 		font-size: var(--font-small);
 		width: 100%;
 		border-bottom: 1px solid var(--border-color);
+		transition: var(--transition-default);
+
+		&.disabled {
+			opacity: 0.3;
+			cursor: default;
+			pointer-events: none;
+			filter: grayscale(1);
+		}
 	}
 
 	a.menu-item {

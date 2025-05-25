@@ -2,7 +2,7 @@
 	import { Footer, Header, InitGuard, LinearLoader, LoginGuard } from './components';
 	import ConnectionsData from './data-sources/ConnectionsData.svelte';
 	import { LoginPage, ProfilePage, TrackingPage, ConnectionsPage } from './pages';
-	import { userData, officeState, currentPage } from './stores';
+	import { userData, officeState, currentPage, appState } from './stores';
 	import { QueryClient, QueryClientProvider } from '@tanstack/svelte-query';
 
 	const queryClient = new QueryClient();
@@ -21,17 +21,33 @@
 		}
 
 		if ($currentPage === '_login' && value.isAuthorized && !value.isFetching) {
-			$currentPage = 'connections';
+			$currentPage = '_init';
 		}
 
 		if ($currentPage !== '_login' && !value.isAuthorized && !value.isFetching) {
 			$currentPage = '_login';
 		}
 	});
+
+	appState.subscribe((value) => {
+		if (!value.isBusy && $currentPage === '_init') {
+			if (value.connectionsLoaded) {
+				if (value.connectionsCount > 0) {
+					$currentPage = 'tracking';
+				} else {
+					$currentPage = 'connections';
+				}
+			}
+		}
+	});
 </script>
 
 <InitGuard />
 <LoginGuard />
+
+{#if $appState.isBusy}
+	<LinearLoader global={true} />
+{/if}
 
 <QueryClientProvider client={queryClient}>
 	{#if $officeState.isOfficeInitialized && $userData.isAuthorized}
@@ -45,8 +61,13 @@
 		<Header />
 
 		{#if $currentPage === '_init'}
-			<LinearLoader global={true} />
-			<p class="wait">Initialization...</p>
+			<p class="wait">
+				{#if $appState.isConnectionsLoading}
+					Loading connections...
+				{:else}
+					Initialization...
+				{/if}
+			</p>
 		{/if}
 
 		{#if $currentPage === '_login'}

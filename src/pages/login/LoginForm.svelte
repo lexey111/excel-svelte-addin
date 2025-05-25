@@ -4,7 +4,9 @@
 </script>
 
 <div class="login-form full-center">
-	<h3>Please log in</h3>
+	<p>
+		Tenant: <b>acme2.5</b>
+	</p>
 	<input type="text" placeholder="Username" disabled={$userData.isFetching} />
 	<input type="password" placeholder="Password" disabled={$userData.isFetching} />
 
