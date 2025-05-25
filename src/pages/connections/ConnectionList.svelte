@@ -152,7 +152,9 @@
 	header={editConnectionHeader}
 	footer={editConnectionFooter}
 >
-	<ConnectionForm bind:connection={currentConnection} />
+	{#if showEditConnectionModal}
+		<ConnectionForm bind:connection={currentConnection} />
+	{/if}
 </LayeredModal>
 
 {#snippet removeConnectionHeader()}

@@ -24,6 +24,11 @@
 	--transition-default: all 0.15s ease-in-out;
 	--transition-slow: all 0.4s ease-in-out;
 
+	--success-color: #198754;
+	--success-contrast-color: #fff;
+	--success-border-color: #198754;
+	--success-background: #d1e7dd;
+
 	--shade-background: #f9f9f9;
 	--shade-background-darker: #ededed;
 

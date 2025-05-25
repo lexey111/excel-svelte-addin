@@ -11,3 +11,25 @@
 		background: var(--secondary-color);
 	}
 }
+
+.spacer {
+	flex-grow: 2;
+}
+
+table.pairs-table {
+	border-collapse: collapse;
+	width: 100%;
+	border: 1px solid var(--shade-background-darker);
+	margin: 1em 0;
+
+	td {
+		border: 1px solid var(--shade-background-darker);
+		padding: 8px 12px;
+	}
+
+	td:first-child {
+		font-weight: 500;
+		font-size: var(--font-small);
+		background-color: var(--shade-background);
+	}
+}

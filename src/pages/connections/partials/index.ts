@@ -5,3 +5,5 @@ export { default as ConnectionDimension } from './ConnectionDimension.svelte';
 export { default as ConnectionDimensions } from './ConnectionDimensions.svelte';
 export { default as ConnectionItem } from './ConnectionItem.svelte';
 export { default as ConnectionSourceItem } from './ConnectionSourceItem.svelte';
+export { default as CheckSource } from './CheckSource.svelte';
+export { default as SourceParams } from './SourceParams.svelte';

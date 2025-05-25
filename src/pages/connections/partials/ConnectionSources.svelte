@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { ConnectionSourceItem, ConnectionSource } from '.';
+	import { ConnectionSourceItem, ConnectionSource, CheckSource } from '.';
 	import {
 		Badge,
 		Button,
@@ -9,6 +9,7 @@
 		LayeredModal
 	} from '../../../components';
 	import { makeid } from '../../../lib/utils';
+	import { isSourceCorrect } from '../../../stores';
 	import type { Connection, Source } from '../../../types';
 
 	type Props = {
@@ -126,6 +127,21 @@
 
 		handleEditSource(newId, true);
 	};
+
+	let showCheckSourceModal = $state(false);
+
+	const handleShowCheckSourceModal = (sourceId?: string) => {
+		console.log('sourceId', sourceId);
+		showCheckSourceModal = true;
+	};
+
+	const closeCheckSourceModal = () => {
+		showCheckSourceModal = false;
+	};
+
+	const currentSourceCanBeSaved = $derived(() => {
+		return isSourceCorrect(currentSource);
+	});
 </script>
 
 <h3 class={connection.sources.length === 0 ? 'dangerous' : ''}>
@@ -191,6 +207,26 @@
 	Are you sure you want to delete dimension?
 </Modal>
 
+{#snippet checkSourceHeader()}
+	Check source
+{/snippet}
+
+{#snippet checkSourceFooter()}
+	<Button variant="secondary" onClick={closeCheckSourceModal} autofocus={true}>Close</Button>
+{/snippet}
+
+<Modal
+	open={showCheckSourceModal}
+	onClose={closeCheckSourceModal}
+	size="auto"
+	header={checkSourceHeader}
+	footer={checkSourceFooter}
+>
+	{#if showCheckSourceModal}
+		<CheckSource source={currentSource} />
+	{/if}
+</Modal>
+
 {#snippet sourceLayerHeader()}
 	{isNewSource ? 'New source' : 'Edit source'}
 {/snippet}
@@ -198,6 +234,13 @@
 {#snippet sourceLayerFooter()}
 	<Button variant="dangerous" icon="delete" onClick={handleShowRemoveSourceModal}
 		>Delete Source</Button
+	>
+	<span class="spacer"></span>
+
+	<Button
+		onClick={() => handleShowCheckSourceModal(currentSource?.id)}
+		variant="secondary"
+		disabled={!currentSourceCanBeSaved()}>Check Source...</Button
 	>
 {/snippet}
 
@@ -207,7 +250,7 @@
 	header={sourceLayerHeader}
 	footer={sourceLayerFooter}
 >
-	{#if currentSource}
+	{#if currentSource && showSourceLayer}
 		<ConnectionSource
 			bind:version={currentSource.version!}
 			bind:entityName={currentSource.entityName!}
