@@ -1,0 +1,13 @@
+.layered-list-item {
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+	width: 100%;
+	transition: var(--transition-default);
+	box-shadow: 0 0 0 1px var(--shade-background-darker);
+	background: var(--shade-background);
+
+	&:hover {
+		background: var(--secondary-color);
+	}
+}

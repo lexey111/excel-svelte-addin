@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Button, Modal } from '../../components';
+	import { Button, Modal, LayeredModal } from '../../components';
 	import { connections, createConnection } from '../../stores';
 	import type { Connection } from '../../types';
 	import ConnectionForm from './ConnectionForm.svelte';
@@ -127,7 +127,7 @@
 </div>
 
 <div class="page-actions">
-	<Button onClick={handleNewConnection} icon="add">New connection</Button>
+	<Button onClick={handleNewConnection} icon="add" noAutosize={true}>New connection</Button>
 </div>
 
 {#snippet editConnectionHeader()}
@@ -158,15 +158,15 @@
 	</Button>
 {/snippet}
 
-<Modal
+<LayeredModal
 	open={showEditConnectionModal}
 	onClose={() => (showEditConnectionModal = false)}
-	size="full-auto"
+	allowBack={false}
 	header={editConnectionHeader}
 	footer={editConnectionFooter}
 >
 	<ConnectionForm bind:connection={currentConnection} />
-</Modal>
+</LayeredModal>
 
 {#snippet removeConnectionHeader()}
 	Delete Connection
@@ -188,86 +188,9 @@
 </Modal>
 
 <style>
-	:global .connection-list {
+	.connection-list {
 		display: flex;
 		flex-flow: column wrap;
 		margin: 2em 0;
-
-		.connection-item {
-			display: flex;
-			flex-flow: row nowrap;
-			align-items: center;
-			width: 100%;
-			transition: var(--transition-default);
-			box-shadow: 0 0 0 1px var(--shade-background-darker);
-			background: var(--shade-background);
-
-			&:hover {
-				background: var(--secondary-color);
-			}
-
-			.connection-content {
-				padding: 12px;
-				display: grid;
-				grid-template-columns: 16px 1fr 36px;
-				gap: 6px;
-				flex-flow: row nowrap;
-				align-items: center;
-				width: 100%;
-				transition: var(--transition-default);
-
-				.connection-icon {
-					display: inline-flex;
-					align-self: flex-start;
-					opacity: 0.6;
-				}
-
-				.connection-name {
-					font-weight: 500;
-					display: flex;
-					align-self: flex-start;
-					flex-flow: column wrap;
-					line-height: 1.4em;
-				}
-
-				.connection-target {
-					line-height: 1.2em;
-					margin: 0.4em 0 0 0;
-					padding: 0;
-					font-weight: normal;
-					font-size: var(--font-small);
-					color: var(--secondary-text-color);
-					b {
-						font-weight: 500;
-					}
-				}
-
-				.connection-sources {
-					font-weight: normal;
-					font-size: var(--font-small);
-					color: var(--secondary-text-color);
-					b {
-						font-weight: 500;
-					}
-				}
-			}
-
-			@container (width < 400px) {
-				.connection-content {
-					grid-template-columns: 14px 1fr 36px;
-					padding: 6px;
-				}
-			}
-
-			@container (width < 300px) {
-				.connection-content {
-					grid-template-columns: 0 1fr 36px;
-
-					.connection-icon {
-						opacity: 0;
-					}
-				}
-			}
-		}
 	}
 </style>

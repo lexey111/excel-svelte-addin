@@ -1,5 +1,15 @@
 <script lang="ts">
-	import { AddIcon, CloseIcon, DeleteIcon, ChevronLeftIcon, ChevronRightIcon } from '../icons';
+	import {
+		AddIcon,
+		CloseIcon,
+		DeleteIcon,
+		ChevronLeftIcon,
+		ChevronRightIcon,
+		LeftArrowIcon,
+		RightArrowIcon,
+		LocationIcon,
+		DimensionIcon
+	} from '../icons';
 	import type { Icon } from '../../types';
 
 	type Props = {
@@ -27,4 +37,20 @@
 
 {#if icon === 'right'}
 	<ChevronRightIcon />
+{/if}
+
+{#if icon === 'left-arrow'}
+	<LeftArrowIcon />
+{/if}
+
+{#if icon === 'right-arrow'}
+	<RightArrowIcon />
+{/if}
+
+{#if icon === 'location'}
+	<LocationIcon />
+{/if}
+
+{#if icon === 'dimension'}
+	<DimensionIcon />
 {/if}

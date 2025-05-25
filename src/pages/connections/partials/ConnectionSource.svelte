@@ -1,18 +1,13 @@
 <script lang="ts">
-	import { Button } from '../../../components';
 	import type { Source } from '../../../types';
 	import ConnectionDimensions from './ConnectionDimensions.svelte';
 
 	type Props = {
-		index: number;
-		onShowRemoveModal: (id: string) => void;
 		onShowRemoveDimensionModal: (sourceId: string, dimensionId: string) => void;
 		onAddDimension: (sourceId: string) => void;
 	} & Source;
 
 	let {
-		index,
-		onShowRemoveModal,
 		onShowRemoveDimensionModal,
 		onAddDimension,
 		id,
@@ -25,23 +20,17 @@
 </script>
 
 <div class="source">
-	<h4>
-		Source #{index + 1}
-		<span class="spacer"></span>
-		<Button onClick={() => onShowRemoveModal(id)} size="small" variant="ghost" icon="delete">
-			Delete source
-		</Button>
-	</h4>
-
 	<div class="source-content">
 		<fieldset>
 			<label for={'cellAddress' + id}>Excel cell</label>
+			<!-- svelte-ignore a11y_autofocus -->
 			<input
 				type="text"
 				id={'cellAddress' + id}
 				bind:value={cellAddress}
 				placeholder="B52"
 				required
+				autofocus
 				aria-invalid={!cellAddress.trim()}
 			/>
 		</fieldset>
@@ -82,3 +71,11 @@
 
 	<ConnectionDimensions sourceId={id} {locators} {onShowRemoveDimensionModal} {onAddDimension} />
 </div>
+
+<style>
+	.source {
+		container-type: size;
+		margin: 0 auto;
+		width: var(--content-clamp);
+	}
+</style>

@@ -1,7 +1,9 @@
+@import 'css/variables.css';
 @import 'css/inputs.css';
 @import 'css/typography.css';
-@import 'css/typography.css';
 @import 'css/icons.css';
+@import 'css/shared.css';
+@import 'css/forms.css';
 
 body {
 	margin: 0;
@@ -43,7 +45,7 @@ body {
 	opacity: 0.1;
 	position: relative;
 	margin: 0 auto;
-	width: clamp(200px, auto, 600px);
+	width: var(--page-clamp);
 }
 
 .full-center {

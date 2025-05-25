@@ -1,5 +1,5 @@
 :root {
-	--font-large: 16px;
+	--font-large: 18px;
 	--font-normal: 14px;
 	--font-small: 12px;
 
@@ -62,4 +62,7 @@
 
 	--dark-color: #212529;
 	--dark-contrast-color: #fff;
+
+	--page-clamp: clamp(200px, auto, 600px);
+	--content-clamp: clamp(200px, 100%, 600px);
 }

@@ -9,3 +9,7 @@ export { default as ConnectionsIcon } from './ConnectionsIcon.svelte';
 export { default as ChevronLeftIcon } from './ChevronLeftIcon.svelte';
 export { default as ChevronRightIcon } from './ChevronRightIcon.svelte';
 export { default as IconSelector } from './IconSelector.svelte';
+export { default as RightArrowIcon } from './RightArrowIcon.svelte';
+export { default as LeftArrowIcon } from './LeftArrowIcon.svelte';
+export { default as LocationIcon } from './LocationIcon.svelte';
+export { default as DimensionIcon } from './DimensionIcon.svelte';

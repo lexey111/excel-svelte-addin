@@ -5,15 +5,19 @@
 	import type { Icon } from '../../types';
 	import { IconSelector } from '../icons';
 
+	export type ButtonSize = 'small' | 'normal' | 'square24' | 'square36' | 'square48';
+	export type ButtonVariant = 'primary' | 'secondary' | 'dangerous' | 'ghost' | 'white' | 'text';
+
 	type Props = {
 		children?: Snippet;
 		onClick: () => void;
 		loading?: boolean;
 		disabled?: boolean;
 		autofocus?: boolean;
-		variant?: 'primary' | 'secondary' | 'dangerous' | 'ghost' | 'white' | 'text';
-		size?: 'small' | 'normal' | 'square24' | 'square36';
+		variant?: ButtonVariant;
+		size?: ButtonSize;
 		icon?: Icon;
+		noAutosize?: boolean;
 	};
 
 	let {
@@ -24,7 +28,8 @@
 		autofocus,
 		variant = 'primary',
 		size = 'normal',
-		icon
+		icon,
+		noAutosize = false
 	}: Props = $props();
 </script>
 
@@ -34,7 +39,7 @@
 	{disabled}
 	class:loading
 	{autofocus}
-	class={[variant, size, icon ? 'with-icon' : ''].join(' ')}
+	class={[variant, size, icon ? 'with-icon' : '', noAutosize ? 'no-autosize' : ''].join(' ')}
 >
 	<div class="button-content">
 		{#if loading}
@@ -156,12 +161,16 @@
 				height: 16px;
 			}
 		}
-		&.square24 {
+		&.square24,
+		&.square36,
+		&.square48 {
 			padding: 0 !important;
-			height: 24px;
-			width: 24px;
 			flex-shrink: 0;
 			flex-grow: 0;
+		}
+		&.square24 {
+			height: 24px;
+			width: 24px;
 			min-height: 24px;
 			min-width: 24px;
 			max-height: 24px;
@@ -173,11 +182,8 @@
 			}
 		}
 		&.square36 {
-			padding: 0 !important;
 			height: 36px;
 			width: 36px;
-			flex-shrink: 0;
-			flex-grow: 0;
 			min-height: 36px;
 			min-width: 36px;
 			max-height: 36px;
@@ -188,6 +194,20 @@
 				height: 16px;
 			}
 		}
+		&.square48 {
+			height: 48px;
+			width: 48px;
+			min-height: 48px;
+			min-width: 48px;
+			max-height: 48px;
+			max-width: 48px;
+
+			svg.icon {
+				width: 20px;
+				height: 20px;
+			}
+		}
+
 		&.with-icon {
 			padding: 0.6em 1em;
 		}
@@ -224,9 +244,15 @@
 			}
 		}
 	}
-	@container (width < 300px) {
-		button {
+	@container (width < 400px) {
+		button:not(.no-autosize) {
 			padding: 0.6em 1em;
+
+			&.with-icon {
+				.button-text {
+					display: none;
+				}
+			}
 		}
 	}
 </style>

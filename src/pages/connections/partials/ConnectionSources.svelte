@@ -1,8 +1,15 @@
 <script lang="ts">
-	import { Badge, Button, Modal, ExclamationIcon } from '../../../components';
+	import { ConnectionSourceItem, ConnectionSource } from '.';
+	import {
+		Badge,
+		Button,
+		Modal,
+		ExclamationIcon,
+		LocationIcon,
+		LayeredModal
+	} from '../../../components';
 	import { makeid } from '../../../lib/utils';
-	import type { Connection } from '../../../types';
-	import ConnectionSource from './ConnectionSource.svelte';
+	import type { Connection, Source } from '../../../types';
 
 	type Props = {
 		connection: Connection;
@@ -10,19 +17,7 @@
 
 	let { connection = $bindable() }: Props = $props();
 
-	const handleAddSource = () => {
-		connection.sources.push({
-			id: makeid(8),
-			version: '',
-			entityName: '',
-			entityType: 'metric',
-			locators: [],
-			cellAddress: ''
-		});
-	};
-
 	let showDeleteSourceConfirmation = $state(false);
-	let deleteSourceId = $state('');
 
 	const cancelDeleteSource = () => {
 		showDeleteSourceConfirmation = false;
@@ -30,18 +25,19 @@
 
 	const confirmRemoveSource = () => {
 		showDeleteSourceConfirmation = false;
-		if (!connection || !deleteSourceId) {
+		if (!connection || !currentSource?.id) {
 			return;
 		}
-		connection.sources = (connection.sources || []).filter((s) => s.id !== deleteSourceId);
+		connection.sources = (connection.sources || []).filter((s) => s.id !== currentSource!.id);
+		showDeleteSourceConfirmation = false;
+		showSourceLayer = false;
 	};
 
-	const handleShowRemoveSourceModal = (id: string) => {
-		if (!connection) {
+	const handleShowRemoveSourceModal = () => {
+		if (!connection || !currentSource) {
 			return;
 		}
 		showDeleteSourceConfirmation = true;
-		deleteSourceId = id;
 	};
 
 	const handleAddDimension = (sourceId: string) => {
@@ -90,42 +86,75 @@
 		deleteDimensionContext.dimensionId = dimensionId;
 		deleteDimensionContext.sourceId = sourceId;
 	};
+
+	let currentSource = $state<Source | undefined>(undefined);
+	let showSourceLayer = $state(false);
+
+	const handleConfirmSourceLayer = () => {
+		showSourceLayer = false;
+	};
+
+	let isNewSource = $state(false);
+
+	const handleEditSource = (sourceId: string, isNew: boolean = false) => {
+		if (!connection) {
+			return;
+		}
+
+		currentSource = connection.sources.find((s) => s.id === sourceId);
+		if (!currentSource) {
+			return;
+		}
+
+		isNewSource = isNew;
+		showSourceLayer = true;
+
+		console.log('Edit source');
+	};
+
+	const handleAddSource = () => {
+		const newId = makeid(8);
+
+		connection.sources.push({
+			id: newId,
+			version: '',
+			entityName: '',
+			entityType: 'metric',
+			locators: [],
+			cellAddress: ''
+		});
+
+		handleEditSource(newId, true);
+	};
 </script>
 
-<h4 class={connection.sources.length === 0 ? 'dangerous' : ''}>
-	Sources {#if connection.sources.length === 0}
+<h3 class={connection.sources.length === 0 ? 'dangerous' : ''}>
+	<LocationIcon inline={true} /> Sources {#if connection.sources.length === 0}
 		<ExclamationIcon inline={true} color="dangerous" />
 	{:else}
 		<Badge variant="primary">{connection.sources.length}</Badge>
 	{/if}
-</h4>
+</h3>
 
-{#each connection.sources as source, index (source.id)}
-	<ConnectionSource
-		bind:version={source.version}
-		bind:entityName={source.entityName}
-		bind:entityType={source.entityType}
-		bind:cellAddress={source.cellAddress}
-		bind:locators={source.locators}
-		id={source.id}
-		{index}
-		onShowRemoveModal={handleShowRemoveSourceModal}
-		onShowRemoveDimensionModal={handleShowRemoveDimensionModal}
-		onAddDimension={handleAddDimension}
-	/>
-{:else}
-	<p>
-		There must be at least one source in the connection. Use the button below to create a new
-		source.
-	</p>
-{/each}
+<div class="sources-list">
+	{#each connection.sources as source (source.id)}
+		<ConnectionSourceItem {source} onEditSource={handleEditSource} />
+	{:else}
+		<p>
+			There must be at least one source in the connection. Use the button below to create a new
+			source.
+		</p>
+	{/each}
+</div>
 
 <div class="page-actions">
-	<Button onClick={handleAddSource} icon="add" variant="secondary">Add source</Button>
+	<Button onClick={handleAddSource} icon="add" variant="secondary" noAutosize={true}
+		>Add source</Button
+	>
 </div>
 
 {#snippet removeSourceHeader()}
-	Delete source
+	Delete Source
 {/snippet}
 
 {#snippet removeSourceFooter()}
@@ -149,7 +178,7 @@
 
 {#snippet removeDimensionFooter()}
 	<Button variant="secondary" onClick={cancelDeleteDimension} autofocus={true}>Cancel</Button>
-	<Button variant="dangerous" onClick={confirmDeleteDimension}>Delete</Button>
+	<Button variant="dangerous" onClick={confirmDeleteDimension} noAutosize={true}>Delete</Button>
 {/snippet}
 
 <Modal
@@ -161,3 +190,41 @@
 >
 	Are you sure you want to delete dimension?
 </Modal>
+
+{#snippet sourceLayerHeader()}
+	{isNewSource ? 'New source' : 'Edit source'}
+{/snippet}
+
+{#snippet sourceLayerFooter()}
+	<Button variant="dangerous" icon="delete" onClick={handleShowRemoveSourceModal}
+		>Delete Source</Button
+	>
+{/snippet}
+
+<LayeredModal
+	open={showSourceLayer}
+	onClose={handleConfirmSourceLayer}
+	header={sourceLayerHeader}
+	footer={sourceLayerFooter}
+>
+	{#if currentSource}
+		<ConnectionSource
+			bind:version={currentSource.version!}
+			bind:entityName={currentSource.entityName!}
+			bind:entityType={currentSource.entityType!}
+			bind:cellAddress={currentSource.cellAddress!}
+			bind:locators={currentSource.locators!}
+			id={currentSource.id!}
+			onShowRemoveDimensionModal={handleShowRemoveDimensionModal}
+			onAddDimension={handleAddDimension}
+		/>
+	{:else}
+		<p>No source selected</p>
+	{/if}
+</LayeredModal>
+
+<style>
+	h3 {
+		margin-top: 2em;
+	}
+</style>

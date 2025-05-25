@@ -108,7 +108,8 @@
 		position: relative;
 		align-items: center;
 		gap: 6px;
-		padding: 0 0 0 2em;
+		font-size: var(--font-large);
+		padding: 0 0 0 20px;
 		box-sizing: border-box;
 		font-weight: bold;
 		transition: var(--transition-default);
@@ -126,11 +127,10 @@
 		position: relative;
 		overflow-y: auto;
 		overflow-x: auto;
-		padding: 2em;
+		padding: 32px 20px;
 	}
 
 	.modal-footer {
-		margin-top: auto;
 		display: flex;
 		align-items: center;
 		align-content: center;
