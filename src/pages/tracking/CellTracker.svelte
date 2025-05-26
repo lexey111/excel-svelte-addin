@@ -201,6 +201,105 @@
 			processSelectedCell();
 		}
 	};
+
+	const actualizeConnection = () => {
+		// update connection state
+		const currentConnection = $connections.data.find((c) => c.id === connection?.id);
+		if (currentConnection) {
+			connection = currentConnection;
+		}
+	};
+
+	const onGetData = (sourceId: string) => {
+		const source = $connections.data
+			.find((c) => c.id === connection?.id)
+			?.sources.find((s) => s.id === sourceId);
+
+		if (!source) {
+			return;
+		}
+
+		console.log('Download cell', source.cellAddress);
+		source.isBusy = true;
+		actualizeConnection();
+
+		setTimeout(
+			() => {
+				source.isBusy = false;
+
+				source.lastUpdated = new Intl.DateTimeFormat('en-US', {
+					weekday: 'long',
+					year: 'numeric',
+					month: 'short',
+					day: 'numeric',
+					hour: '2-digit',
+					minute: '2-digit'
+				}).format(new Date());
+
+				const value = Math.floor(Math.random() * 10000) / 100;
+				source.lastValue = value.toFixed(2);
+
+				Excel.run(async (context) => {
+					const activeSheet = context.workbook.worksheets.getActiveWorksheet();
+					const range = activeSheet.getRange(source.cellAddress);
+					range.select();
+					range.values = [[value]];
+					// range.format.autofitColumns();
+
+					await context.sync();
+
+					// await processSelectedCell();
+				});
+
+				actualizeConnection();
+			},
+			Math.floor(Math.random() * 500) + 100
+		);
+	};
+
+	// todo: normal request
+	const onGetAllData = () => {
+		($connections.data.find((c) => c.id === connection?.id)?.sources || []).forEach((source) => {
+			if (source.isBusy) {
+				return;
+			}
+			console.log('Download cell', source.cellAddress);
+
+			source.isBusy = true;
+			actualizeConnection();
+
+			setTimeout(
+				() => {
+					source.isBusy = false;
+
+					source.lastUpdated = new Intl.DateTimeFormat('en-US', {
+						weekday: 'long',
+						year: 'numeric',
+						month: 'short',
+						day: 'numeric',
+						hour: '2-digit',
+						minute: '2-digit'
+					}).format(new Date());
+
+					const value = Math.floor(Math.random() * 10000) / 100;
+					source.lastValue = value.toFixed(2);
+
+					Excel.run(async (context) => {
+						const activeSheet = context.workbook.worksheets.getActiveWorksheet();
+						const range = activeSheet.getRange(source.cellAddress);
+						range.select();
+						range.values = [[value]];
+						// range.format.autofitColumns();
+
+						await context.sync();
+					});
+
+					actualizeConnection();
+				},
+				Math.floor(Math.random() * 800) + 100
+			);
+		});
+	};
 </script>
 
 {#if sheetAvailable}
@@ -212,9 +311,11 @@
 		{connection}
 		{onTargetCellClick}
 		{onChangeConnectionId}
+		{onGetAllData}
+		cellAddress={selectedCell}
 	/>
 
-	<TrackingCell cellAddress={selectedCell} {connection} />
+	<TrackingCell cellAddress={selectedCell} {connection} {onGetData} />
 {:else}
 	<Alert>Excel is not available. The plugin cannot establish a connection to the sheet.</Alert>
 {/if}

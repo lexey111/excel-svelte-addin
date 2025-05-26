@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { Button } from '../../../components';
 	import { connections } from '../../../stores';
 	import type { Connection } from '../../../types';
 
@@ -10,6 +11,8 @@
 		connection: Connection | null;
 		onTargetCellClick: (cellAddress: string) => void;
 		onChangeConnectionId: (id: string) => void;
+		onGetAllData: () => void;
+		cellAddress: string;
 	};
 
 	let {
@@ -19,7 +22,9 @@
 		bookName,
 		connection,
 		onTargetCellClick,
-		onChangeConnectionId
+		onChangeConnectionId,
+		onGetAllData,
+		cellAddress
 	}: Props = $props();
 
 	// eslint-disable-next-line svelte/prefer-writable-derived
@@ -35,6 +40,10 @@
 			onChangeConnectionId(currentConnectionId);
 		}
 	});
+
+	const connectionIsBusy = $derived(() => {
+		return connection?.sources.some((s) => s.isBusy);
+	});
 </script>
 
 <div class="tracking-source">
@@ -48,6 +57,7 @@
 			</select>
 		</fieldset>
 	</div>
+
 	<div class="tracking-current">
 		<div class="book"><b>Book:</b> {bookName || 'unknown'}</div>
 		<div class="sheet"><b>Sheet:</b> {sheetName || 'unknown'} ({sheetNumber + 1})</div>
@@ -59,14 +69,31 @@
 
 	{#if connection}
 		<h4>Cells in the connection</h4>
+
 		<div class="connection-cells">
 			{#each connection.sources as source (source.id)}
 				<!-- svelte-ignore a11y_click_events_have_key_events -->
 				<!-- svelte-ignore a11y_no_static_element_interactions -->
-				<div class="cell" onclick={() => onTargetCellClick(source.cellAddress)}>
+				<div
+					class="cell"
+					onclick={() => onTargetCellClick(source.cellAddress)}
+					class:disabled={source.isBusy}
+					class:current={cellAddress === source.cellAddress}
+				>
 					{source.cellAddress}
 				</div>
 			{/each}
+
+			<div class="connection-get-all-data">
+				<Button
+					onClick={onGetAllData}
+					icon="download"
+					variant="text"
+					size="small"
+					disabled={connectionIsBusy()}
+					noAutosize={true}>Get all the data</Button
+				>
+			</div>
 		</div>
 	{/if}
 </div>
@@ -95,7 +122,7 @@
 		margin-top: 1em;
 		display: flex;
 		flex-flow: row wrap;
-		gap: 4px;
+		gap: 6px;
 	}
 
 	.cell {
@@ -108,9 +135,23 @@
 		cursor: pointer;
 		transition: var(--transition-default);
 		opacity: 0.7;
+		display: flex;
+		align-items: center;
+		font-weight: 600;
 
 		&:hover {
 			opacity: 1;
+		}
+
+		&.disabled {
+			pointer-events: none;
+			filter: grayscale(1);
+		}
+
+		&.current {
+			box-shadow: 0 0 0 2px var(--success-border-color);
+			background: var(--success-border-color);
+			color: var(--success-contrast-color);
 		}
 	}
 </style>

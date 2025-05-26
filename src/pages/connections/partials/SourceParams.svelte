@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { Spinner } from '../../../components';
 	import type { Source } from '../../../types';
 
 	type Props = {
@@ -35,6 +36,25 @@
 						.join(', ')}</td
 				>
 			</tr>
+			{#if source?.isBusy}
+				<tr>
+					<td>State</td>
+					<td><Spinner message="Loading data..." /></td>
+				</tr>
+			{/if}
+
+			{#if source?.lastUpdated}
+				<tr>
+					<td>Last Updated</td>
+					<td>{source.lastUpdated}</td>
+				</tr>
+			{/if}
+			{#if source?.lastValue}
+				<tr>
+					<td>Last Value</td>
+					<td>{source.lastValue}</td>
+				</tr>
+			{/if}
 		</tbody>
 	</table>
 {/if}

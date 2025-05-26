@@ -7,4 +7,5 @@ export type Icon =
 	| 'left-arrow'
 	| 'right-arrow'
 	| 'location'
+	| 'download'
 	| 'dimension';

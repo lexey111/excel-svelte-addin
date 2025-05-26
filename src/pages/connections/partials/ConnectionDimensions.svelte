@@ -49,8 +49,11 @@
 	{/each}
 
 	<div class="source-dimensions-actions">
-		<Button onClick={() => onAddDimension(sourceId)} icon="add" variant="secondary"
-			>Add dimension</Button
+		<Button
+			onClick={() => onAddDimension(sourceId)}
+			icon="add"
+			variant="secondary"
+			noAutosize={true}>Add dimension</Button
 		>
 	</div>
 </div>

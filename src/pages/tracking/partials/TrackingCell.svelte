@@ -1,13 +1,15 @@
 <script lang="ts">
+	import { Button } from '../../../components/shared';
 	import type { Connection } from '../../../types';
 	import { SourceParams } from '../../connections/partials';
 
 	type Props = {
 		cellAddress: string;
 		connection?: Connection | null;
+		onGetData: (sourceId: string) => void;
 	};
 
-	let { cellAddress, connection }: Props = $props();
+	let { cellAddress, connection, onGetData }: Props = $props();
 
 	const targetSource = $derived(() => {
 		if (!connection) {
@@ -27,9 +29,20 @@
 	{/if}
 </div>
 
-<div class="connection-params">
-	<SourceParams source={targetSource()} />
-</div>
+{#if targetSource()}
+	<div class="connection-params">
+		<SourceParams source={targetSource()} />
+	</div>
+
+	<div class="connection-get-data">
+		<Button
+			onClick={() => onGetData(targetSource()?.id || '')}
+			disabled={targetSource()?.isBusy}
+			icon="download"
+			noAutosize={true}>Get data for {targetSource()?.cellAddress}</Button
+		>
+	</div>
+{/if}
 
 <style>
 	.tracking-cell {

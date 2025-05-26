@@ -24,6 +24,9 @@ export type Source = {
 	entityType: EntityType;
 	locators: DimensionLocator[]; // DimensionLocator Product=A, Region=EMEA, Month=July 2025
 	cellAddress: string;
+	isBusy?: boolean;
+	lastUpdated?: string;
+	lastValue?: string;
 };
 
 export type Connection = {

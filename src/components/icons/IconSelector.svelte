@@ -8,7 +8,8 @@
 		LeftArrowIcon,
 		RightArrowIcon,
 		LocationIcon,
-		DimensionIcon
+		DimensionIcon,
+		DownloadIcon
 	} from '../icons';
 	import type { Icon } from '../../types';
 
@@ -53,4 +54,8 @@
 
 {#if icon === 'dimension'}
 	<DimensionIcon />
+{/if}
+
+{#if icon === 'download'}
+	<DownloadIcon />
 {/if}
