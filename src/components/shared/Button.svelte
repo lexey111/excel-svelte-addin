@@ -70,6 +70,7 @@
 		background: var(--accent-color);
 		color: var(--accent-contrast-color);
 		transition: var(--transition-default);
+		font-size: var(--font-small);
 
 		display: flex;
 		flex-flow: row wrap;
@@ -211,6 +212,24 @@
 		&.with-icon {
 			padding: 0.6em 1em;
 		}
+		.loading {
+			padding: 0.6em 3em;
+
+			.button-content {
+				position: relative;
+
+				.button-text {
+					transform: translateX(0.7em);
+				}
+
+				.button-spinner {
+					position: absolute;
+					left: -1em;
+					top: 50%;
+					transform: translateY(-40%);
+				}
+			}
+		}
 	}
 
 	:global .button-content {
@@ -226,27 +245,13 @@
 		}
 	}
 
-	.loading {
-		padding: 0.6em 3em;
-
-		.button-content {
-			position: relative;
-
-			.button-text {
-				transform: translateX(0.7em);
-			}
-
-			.button-spinner {
-				position: absolute;
-				left: -1em;
-				top: 50%;
-				transform: translateY(-40%);
-			}
-		}
-	}
 	@container (width < 400px) {
-		button:not(.no-autosize) {
+		:global button:not(.no-autosize) {
 			padding: 0.6em 1em;
+
+			.loading {
+				padding: 0.6em 3em;
+			}
 
 			&.with-icon {
 				.button-text {

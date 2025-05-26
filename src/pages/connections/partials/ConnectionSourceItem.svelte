@@ -96,7 +96,7 @@
 		&.error {
 			box-shadow: 0 0 0 1px var(--error-color-border);
 			margin-bottom: 2px;
-			background: var(--error-color-light);
+			background: var(--error-background);
 
 			.source-icon {
 				color: var(--error-color);

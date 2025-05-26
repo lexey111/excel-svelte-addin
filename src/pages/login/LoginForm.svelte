@@ -11,8 +11,11 @@
 	<input type="password" placeholder="Password" disabled={$userData.isFetching} />
 
 	<div class="actions">
-		<Button onClick={setFakeUser} loading={$userData.isFetching} disabled={$userData.isFetching}
-			>Log In</Button
+		<Button
+			onClick={setFakeUser}
+			loading={$userData.isFetching}
+			disabled={$userData.isFetching}
+			noAutosize={true}>Log In</Button
 		>
 	</div>
 </div>

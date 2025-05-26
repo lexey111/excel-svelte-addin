@@ -35,7 +35,7 @@ input[type='password'] {
 
 	&[aria-invalid='true'] {
 		border: 1px solid var(--error-color);
-		background: hsl(from var(--error-color-light) h s calc(l + 4));
+		background: hsl(from var(--error-background) h s calc(l + 4));
 		&::placeholder {
 			color: var(--error-color);
 			opacity: 0.4;

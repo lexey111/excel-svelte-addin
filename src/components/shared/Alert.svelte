@@ -28,7 +28,7 @@
 		align-items: center;
 		gap: 1em;
 		color: var(--error-color);
-		background-color: var(--error-color-light);
+		background-color: var(--error-background);
 		padding: 2em;
 		border: 1px solid var(--error-color-border);
 		animation-name: fadeIn;

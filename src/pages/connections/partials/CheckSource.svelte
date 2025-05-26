@@ -85,7 +85,7 @@
 
 		&.error {
 			border-color: var(--error-color-border);
-			background-color: var(--error-color-light);
+			background-color: var(--error-background);
 		}
 	}
 </style>
