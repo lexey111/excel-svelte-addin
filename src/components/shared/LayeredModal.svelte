@@ -73,7 +73,9 @@
 			display: grid;
 			grid-template-rows: 64px 1fr 64px;
 			width: 100vw;
+			min-width: 100vw;
 			height: 100vh;
+			min-height: 100vh;
 			margin: 0;
 			padding: 0;
 		}
