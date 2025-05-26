@@ -3,15 +3,14 @@
 	import Button from './Button.svelte';
 
 	type Props = {
-		header?: Snippet;
+		header: Snippet;
 		children: Snippet;
 		footer?: Snippet;
-		size?: 'full' | 'big' | 'auto' | 'full-auto';
 		open: boolean;
 		onClose: () => void;
 	};
 
-	let { children, open, onClose, header, footer, size = 'full' }: Props = $props();
+	let { children, open, onClose, header, footer }: Props = $props();
 	let ref: HTMLDialogElement | null = null;
 
 	const handleClose = () => {
@@ -28,31 +27,31 @@
 	});
 </script>
 
-<dialog bind:this={ref} onclose={handleClose} class={'modal ' + size}>
-	<div class="modal-header">
+<dialog bind:this={ref} onclose={handleClose} class="dialog" class:open>
+	<div class="dialog-header">
 		{@render header?.()}
-		<div class="modal-header-close">
+		<div class="dialog-header-close">
 			<Button onClick={handleClose} variant="white" size="square24" icon="close"></Button>
 		</div>
 	</div>
 
-	<div class="modal-body">
+	<div class="dialog-body">
 		{@render children?.()}
 	</div>
 
 	{#if !!footer}
-		<div class="modal-footer">
+		<div class="dialog-footer">
 			{@render footer?.()}
 		</div>
 	{:else}
-		<div class="modal-footer">
+		<div class="dialog-footer">
 			<Button onClick={handleClose} variant="secondary">Close</Button>
 		</div>
 	{/if}
 </dialog>
 
 <style>
-	.modal {
+	.dialog {
 		border: none;
 		border-radius: var(--border-radius);
 		box-shadow: 0 4px 18px rgba(0, 0, 0, 0.3);
@@ -61,84 +60,46 @@
 		animation-play-state: initial;
 		animation-fill-mode: forwards;
 		animation-iteration-count: 1;
-		opacity: 0.1;
 		padding: 0;
 	}
 
-	.modal:open {
-		display: grid;
-		grid-template-rows: 48px 1fr 64px;
-	}
-
-	.modal.full {
-		width: 100vw;
-		height: 100vh;
-		border-radius: 0;
-		box-shadow: none;
-	}
-
-	.modal.big,
-	.modal.full-auto {
-		width: 90vw;
-		height: 90vh;
-	}
-
-	@container (width < 600px) {
-		.modal.full-auto {
-			width: 100vw;
-			height: 100vh;
-			border-radius: 0;
-			box-shadow: none;
-			max-width: 100vw;
-			max-height: 100vh;
-
-			& > .modal-header {
-				background-color: var(--shade-background-darker);
-			}
-			& > .modal-footer {
-				background-color: var(--shade-background-darker);
-				height: 56px;
-			}
-		}
-	}
-
-	.modal-header {
+	.dialog-header {
 		display: flex;
 		flex-flow: row nowrap;
 		position: relative;
 		align-items: center;
+		height: 64px;
 		gap: 6px;
 		font-size: var(--font-large);
-		padding: 0 0 0 20px;
+		padding: 0 0 0 32px;
 		box-sizing: border-box;
 		font-weight: bold;
-		transition: var(--transition-default);
 	}
 
-	.modal-header-close {
+	.dialog-header-close {
 		margin-left: auto;
 		align-self: center;
-		margin-right: 0.7em;
+		margin-right: 16px;
 	}
 
-	.modal-body {
+	.dialog-body {
 		display: flex;
 		flex-flow: column wrap;
 		position: relative;
 		overflow-y: auto;
 		overflow-x: auto;
-		padding: 32px 20px;
+		padding: 32px;
 	}
 
-	.modal-footer {
+	.dialog-footer {
 		display: flex;
 		align-items: center;
 		align-content: center;
 		justify-content: center;
 		height: 64px;
-		padding: 0 2em;
+		padding: 0 16px;
 		gap: 6px;
-		transition: var(--transition-slow);
+		height: 64px;
 	}
 
 	dialog::backdrop {

@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { ConnectionSourceItem, ConnectionSource, CheckSource } from '.';
+	import { ConnectionSourceItem, ConnectionSource, CheckSource } from './index';
 	import {
 		Badge,
 		Button,
-		Modal,
+		Dialog,
 		ExclamationIcon,
 		LocationIcon,
 		LayeredModal
@@ -178,15 +178,14 @@
 	<Button variant="dangerous" onClick={confirmRemoveSource}>Delete</Button>
 {/snippet}
 
-<Modal
+<Dialog
 	open={showDeleteSourceConfirmation}
 	onClose={cancelDeleteSource}
-	size="auto"
 	header={removeSourceHeader}
 	footer={removeSourceFooter}
 >
 	Are you sure you want to delete source?
-</Modal>
+</Dialog>
 
 {#snippet removeDimensionHeader()}
 	Delete dimension
@@ -197,15 +196,14 @@
 	<Button variant="dangerous" onClick={confirmDeleteDimension} noAutosize={true}>Delete</Button>
 {/snippet}
 
-<Modal
+<Dialog
 	open={showDeleteDimensionConfirmation}
 	onClose={cancelDeleteDimension}
-	size="auto"
 	header={removeDimensionHeader}
 	footer={removeDimensionFooter}
 >
 	Are you sure you want to delete dimension?
-</Modal>
+</Dialog>
 
 {#snippet checkSourceHeader()}
 	Check source
@@ -215,17 +213,16 @@
 	<Button variant="secondary" onClick={closeCheckSourceModal} autofocus={true}>Close</Button>
 {/snippet}
 
-<Modal
+<Dialog
 	open={showCheckSourceModal}
 	onClose={closeCheckSourceModal}
-	size="auto"
 	header={checkSourceHeader}
 	footer={checkSourceFooter}
 >
 	{#if showCheckSourceModal}
 		<CheckSource source={currentSource} />
 	{/if}
-</Modal>
+</Dialog>
 
 {#snippet sourceLayerHeader()}
 	{isNewSource ? 'New source' : 'Edit source'}

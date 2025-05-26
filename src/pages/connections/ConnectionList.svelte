@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Button, Modal, LayeredModal } from '../../components';
+	import { Button, Dialog, LayeredModal } from '../../components';
 	import { connections, createConnection, isConnectionCorrect } from '../../stores';
 	import type { Connection } from '../../types';
 	import ConnectionForm from './ConnectionForm.svelte';
@@ -166,15 +166,14 @@
 	<Button variant="dangerous" onClick={confirmDeleteConnection}>Delete</Button>
 {/snippet}
 
-<Modal
+<Dialog
 	open={showDeleteConnectionConfirmation}
 	onClose={cancelDeleteConnection}
-	size="auto"
 	header={removeConnectionHeader}
 	footer={removeConnectionFooter}
 >
 	Are you sure you want to delete connection "{deleteConnectionContext.name}"?
-</Modal>
+</Dialog>
 
 <style>
 	.connection-list {

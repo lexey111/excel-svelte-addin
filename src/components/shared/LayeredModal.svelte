@@ -28,7 +28,7 @@
 	});
 </script>
 
-<dialog bind:this={ref} onclose={handleClose} class="modal">
+<dialog bind:this={ref} onclose={handleClose} class="modal" class:open>
 	<div class="modal-header" class:allow-back={allowBack}>
 		{#if allowBack}
 			<div class="modal-header-close">
@@ -67,17 +67,25 @@
 		&:focus {
 			outline: none;
 		}
+
+		/* For Excel */
+		&.open {
+			display: grid;
+			grid-template-rows: 64px 1fr 64px;
+			width: 100vw;
+			height: 100vh;
+			margin: 0;
+			padding: 0;
+		}
 	}
 
 	.modal:open {
 		display: grid;
 		grid-template-rows: 64px 1fr 64px;
-		border-radius: 0;
 		width: 100vw;
 		height: 100vh;
-		box-shadow: none;
-		max-width: 100vw;
-		max-height: 100vh;
+		margin: 0;
+		padding: 0;
 	}
 
 	.modal-header {
@@ -87,7 +95,7 @@
 		align-items: center;
 		font-size: var(--font-large);
 		gap: 2px;
-		padding: 0 0 0 32px;
+		padding: 0 0 0 16px;
 		box-sizing: border-box;
 		font-weight: bold;
 
@@ -106,7 +114,7 @@
 		position: relative;
 		overflow-y: auto;
 		overflow-x: auto;
-		padding: 2em;
+		padding: 2em 1em;
 	}
 
 	.modal-footer {
