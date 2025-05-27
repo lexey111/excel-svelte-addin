@@ -47,12 +47,14 @@ export default defineConfig({
 		https: await getHttpsOptions(),
 		port: Number.parseInt(process.env.server_port || '5173'),
 		strictPort: false,
-		open: '/' // opens the correct /taskpane.html when opening browser to view in web
+		open: false
+		// open: '/' // opens the correct /taskpane.html when opening browser to view in web
 	},
 	preview: {
 		https: await getHttpsOptions(),
 		port: Number.parseInt(process.env.preview_server_port || '5173'),
 		strictPort: false,
-		open: '/taskpane.html' // opens the correct /taskpane.html when opening browser to view in web
+		open: false
+		// open: '/taskpane.html' // opens the correct /taskpane.html when opening browser to view in web
 	}
 });
