@@ -4,8 +4,8 @@
   <Version>1.0.0.0</Version>
   <ProviderName>Contoso</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
-  <DisplayName DefaultValue="fintastic-excel-svelte"/>
-  <Description DefaultValue="A template to get started."/>
+  <DisplayName DefaultValue="Fintastic Excel connector"/>
+  <Description DefaultValue="Links Fintastic data with Excel sheets."/>
   <IconUrl DefaultValue="https://localhost:5173/assets/icon-32.png"/>
   <HighResolutionIconUrl DefaultValue="https://localhost:5173/assets/icon-64.png"/>
   <SupportUrl DefaultValue="https://www.contoso.com/help"/>
@@ -72,13 +72,13 @@
         <bt:Url id="Taskpane.Url" DefaultValue="https://localhost:5173/taskpane.html"/>
       </bt:Urls>
       <bt:ShortStrings>
-        <bt:String id="GetStarted.Title" DefaultValue="Get started with your sample add-in!"/>
+        <bt:String id="GetStarted.Title" DefaultValue="Get started with Fintastic add-in!"/>
         <bt:String id="CommandsGroup.Label" DefaultValue="Commands Group"/>
-        <bt:String id="TaskpaneButton.Label" DefaultValue="Show Taskpane 1"/>
+        <bt:String id="TaskpaneButton.Label" DefaultValue="Fintastic"/>
       </bt:ShortStrings>
       <bt:LongStrings>
-        <bt:String id="GetStarted.Description" DefaultValue="Your sample add-in loaded successfully. Go to the HOME tab and click the 'Show Taskpane' button to get started."/>
-        <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Click to Show a Taskpane"/>
+        <bt:String id="GetStarted.Description" DefaultValue="Fintastic add-in loaded successfully. Go to the HOME tab and click the 'Fintastic' button to get started."/>
+        <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Click to Fintastic"/>
       </bt:LongStrings>
     </Resources>
   </VersionOverrides>
